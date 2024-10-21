@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-function CalendarComp() {
+function MissionCalendarComp() {
   const [eventsArray, setEventsArray] = useState([
     {
       title: '목욕시키기',
@@ -86,4 +86,4 @@ function CalendarComp() {
   );
 }
 
-export default CalendarComp;
+export default MissionCalendarComp;

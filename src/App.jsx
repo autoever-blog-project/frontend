@@ -1,4 +1,3 @@
-import CalendarComp from '@/components/calendar/CalendarComp';
 import MissionPage from './pages/mission/MissionPage';
 
 function App() {
