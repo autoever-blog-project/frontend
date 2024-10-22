@@ -9,7 +9,7 @@ function PostCardFooter({ member, postInfo }) {
       <S.PostCardFooterContainer>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           {/* 사용자의 프로필 이미지 불러와서 넣기 */}
-          <S.PostCardOwnerProfileImg src="" alt="profileImg" />
+          <S.PostCardOwnerProfileImg src="" />
           <div>{member.nickname}</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 20 }}>

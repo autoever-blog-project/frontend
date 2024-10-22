@@ -38,7 +38,7 @@ export const PostCardFooterContainer = styled.div`
 
 //PostCardBody 구성요소
 
-export const PostCardEmoji = styled.image`
+export const PostCardEmoji = styled.img`
   width: 16px;
   height: 16px;
 `;
@@ -54,13 +54,17 @@ export const PostCardTitle = styled.p`
   text-overflow: ellipsis;
   font-weight: 800;
   font-size: 16px;
+  height: 18px;
 `;
 
 export const PostCardBodyP = styled.p`
   font-size: 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.2;
+  -webkit-line-clamp: 6;
 `;
 
 export const PostCardBodyDateAndCmt = styled.p`
@@ -81,5 +85,4 @@ export const PostCardOwnerProfileImg = styled.img`
 export const PostCardTotalHeart = styled.img`
   width: 100%;
   height: 100%;
-  /* object-fit: cover; */
 `;
