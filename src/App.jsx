@@ -1,9 +1,9 @@
-import MainPage from '@/pages/MainPage/MainPage.jsx';
+import PostPage from '@/pages/PostPage/PostPage.jsx';
 
 function App() {
   return (
     <div>
-      <MainPage></MainPage>
+      <PostPage></PostPage>
     </div>
   );
 }

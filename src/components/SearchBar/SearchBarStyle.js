@@ -15,7 +15,7 @@ export const SearchBarInputField = styled.input`
   &::placeholder {
   }
 `;
-
+//postpage topcontainer와 width 맞추기
 export const SearchBarContainer = styled.div`
   width: 500px;
   height: 50px;
