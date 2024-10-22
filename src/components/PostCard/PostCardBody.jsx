@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import * as S from './PostCardStyle.js';
 import emoji from '@/assets/emoji _slightly frowning face.svg';
+
+//Emoji 경로 수정
 function PostCardBody({ postInfo }) {
   const postTags = postInfo.tag.split(' ').map((item) => `#${item}  `);
   return (

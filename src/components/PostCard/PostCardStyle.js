@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const PostCardContainer = styled.div`
   width: 300px;
-  height: 400px;
+  height: 350px;
   background-color: white;
+  border-radius: 10px;
 `;
 
 //PostCard 구성요소
@@ -12,11 +13,13 @@ export const PostCardImg = styled.img`
   width: 100%;
   height: 200px;
   object-fit: cover;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 `;
 
 export const PostCardBodyContainer = styled.div`
   width: (100%-10px);
-  height: 155px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -64,7 +67,7 @@ export const PostCardBodyP = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.2;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 2;
 `;
 
 export const PostCardBodyDateAndCmt = styled.p`

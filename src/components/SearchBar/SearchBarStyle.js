@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const SearchBarInputField = styled.input`
   text-align: left;
   color: black;
-  height: 60px;
-  font-size: 30px;
+  height: 50px;
+  font-size: 17px;
   /* font-weight: 400; */
   width: 100%;
   background-color: transparent;
@@ -17,8 +17,8 @@ export const SearchBarInputField = styled.input`
 `;
 
 export const SearchBarContainer = styled.div`
-  width: 600px;
-  height: 70px;
+  width: 500px;
+  height: 50px;
   border-radius: 80px;
   border: 1px black solid;
   /* justify-content: center; */
