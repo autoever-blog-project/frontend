@@ -12,6 +12,7 @@ export const MyPagePostCard = styled.div`
   height: 300px;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid #000;
 `;
 
 export const CardContentsWrapper = styled.div`
