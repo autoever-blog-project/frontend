@@ -1,4 +1,5 @@
 import WritePageEditor from './WritePageEditor.jsx';
+import WritePageImage from './WritePageImage.jsx';
 import WritePageRadio from './WritePageRadio.jsx';
 import * as S from './WritePageStyle.js';
 import WritePageTag from './WritePageTag.jsx';
@@ -16,7 +17,7 @@ function WritePage() {
         </form>
         <WritePageTag onSubmitTags={handleSubmitTags} />
         <WritePageEditor />
-        <div className="content"></div>
+        <WritePageImage />
       </S.WritePageViewContainer>
     </div>
   );
