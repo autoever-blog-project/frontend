@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const TagButtonContainer = styled.button`
-  border: 1px solid ${(props) => (props.clicked ? 'black' : 'red')};
-  color: ${(props) => (props.clicked ? 'black' : 'red')};
+  border: 1px solid ${(props) => (props.$clicked ? 'red' : 'black')};
+  color: ${(props) => (props.$clicked ? 'red' : 'black')};
   border-radius: 13px;
   padding-left: 10px;
   padding-right: 10px;
