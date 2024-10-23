@@ -13,6 +13,7 @@ import {
 } from './MyPage.style';
 import temp from '@/assets/dogprofile.jpg';
 import MyPageCalendarComp from '../../components/mypage/MyPageCalendarComp';
+import MyPagePostComp from '../../components/mypage/MyPagePostComp';
 
 //TODO : puppy 데이터 init하기
 
@@ -54,12 +55,13 @@ function MyPage() {
                 onClick={() => {
                   handleTebButton(tab.id);
                 }}
+                isSelected={activeTab === tab.id}
               >
                 <p>{tab.button}</p>
               </TebmenuButton>
             ))}
           </TebmenuWrapper>
-          <TebContentsWrapper>{activeTab === 0 ? '1gd' : <MyPageCalendarComp />}</TebContentsWrapper>
+          <TebContentsWrapper>{activeTab === 0 ? <MyPagePostComp /> : <MyPageCalendarComp />}</TebContentsWrapper>
         </ContentsContainer>
       </Container>
     </>

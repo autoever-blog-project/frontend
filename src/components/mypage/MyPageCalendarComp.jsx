@@ -67,8 +67,8 @@ function MyPageCalendarComp() {
         droppable={true} // 캘린더에 요소를 드롭하여 이벤트를 생성할 수 있도록 허용합니다.
         //selectable={true} // 사용자가 일정 범위를 선택하여 이벤트를 추가할 수 있도록 허용합니다.
         //selectMirror={true} // 이벤트를 추가할 때 선택한 영역을 표시합니다.
-        //eventBackgroundColor="#ff0000" // 이벤트의 배경색을 설정합니다.
-        //eventBorderColor="#ff0000" // 이벤트의 테두리 색을 설정합니다.
+        eventBackgroundColor="#ff0000" // 이벤트의 배경색을 설정합니다.
+        eventBorderColor="#ff0000" // 이벤트의 테두리 색을 설정합니다.
         //allDay={true} // 이벤트가 하루 종일인지 여부를 지정합니다.
         timeZone="UTC" // 캘린더의 시간대를 UTC로 설정합니다.
         headerToolbar={{

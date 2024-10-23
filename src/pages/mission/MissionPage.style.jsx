@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MissionContainer = styled.div`
   width: 100%;
-  height: 500px;
+  height: 100%;
   background-color: white;
   :hover {
     z-index: 1000;
@@ -42,4 +42,9 @@ export const SubTitleText = styled.div`
   line-height: 1.5;
   margin-bottom: 10px;
   color: black;
+`;
+
+export const HistoryContainer = styled.div`
+  width: 100%;
+  height: 100%;
 `;

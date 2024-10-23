@@ -4,7 +4,7 @@ import MyPage from './pages/mypage/MyPage';
 function App() {
   return (
     <div>
-      <MissionPage />
+      <MyPage />
     </div>
   );
 }

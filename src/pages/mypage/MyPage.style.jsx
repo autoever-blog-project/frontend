@@ -65,7 +65,6 @@ export const ProfileMenuWrapper = styled.div`
 export const ContentsContainer = styled.div`
   width: 100%;
   height: 100%;
-  background-color: white;
 `;
 
 export const TebmenuWrapper = styled.div`
@@ -82,9 +81,9 @@ export const TebmenuButton = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-color: ${(props) => (props.isSelected ? '#fff' : '#f9f9f9')};
-  border: ${(props) => (props.isSelected ? '' : '3px solid #B8B8B8')};
-  border-top: ${(props) => (props.isSelected ? '3px solid #B8B8B8' : '')};
+  background-color: ${({ isSelected }) => (isSelected ? '#fff' : '#f9f9f9')};
+  border: ${({ isSelected }) => (isSelected ? '' : '3px solid #B8B8B8')};
+  border-top: ${({ isSelected }) => (isSelected ? '3px solid #B8B8B8' : '')};
   p {
     font-size: 20px;
     font-style: normal;
@@ -95,5 +94,5 @@ export const TebmenuButton = styled.div`
 export const TebContentsWrapper = styled.div`
   width: 100%;
   height: 100%;
-  background-color: green;
+  //background-color: green;
 `;

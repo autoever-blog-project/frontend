@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MissionContainer, MissionContents, ImageContainer, TextContainer, SubTitleText } from './MissionPage.style';
+import {
+  MissionContainer,
+  MissionContents,
+  ImageContainer,
+  TextContainer,
+  SubTitleText,
+  HistoryContainer,
+} from './MissionPage.style';
 import MissionCalendarComp from '@/components/mission/MissionCalendarComp';
 import bathImage from '@/assets/bath.svg';
 import axios from 'axios';
-
+import missionComplete from '@/assets/missioncomplete.png';
 //강아지와 주인 개인미션에 넣을사진
 
 //예정일이 없을때 랜덤 미션 리스트
@@ -82,6 +89,7 @@ function MissionPage() {
         //
 
         setIsUploaded(!isUploaded);
+        setIsComplete(true);
       } catch (error) {
         console.error('이미지 업로드 중 오류 발생:', error);
       }
@@ -89,6 +97,7 @@ function MissionPage() {
   };
 
   const handleContainerClick = () => {
+    if (isComplete) return;
     if (fileInputRef.current) {
       fileInputRef.current.click(); // input 파일 선택창 열기
     }
@@ -117,35 +126,49 @@ function MissionPage() {
     <>
       <MissionContainer onClick={handleContainerClick}>
         <MissionContents>
-          {isDueDay
-            ? todayMission && ( // 개인미션일때는 고정 이미지url , 강아지와 주인이 의욕에 불타는사진
-                <>
-                  <ImageContainer>
-                    <img src={todayMission.imageUrl} alt={todayMission.mission} />
-                  </ImageContainer>
-                  <TextContainer>
-                    <p>오늘의 미션</p>
-                    <p>{todayMission.mission}!</p>
-                  </TextContainer>
-                </>
-              )
-            : todayMission && (
-                <>
-                  <ImageContainer>
-                    <img src={todayMission.imageUrl} alt={todayMission.mission} />
-                  </ImageContainer>
-                  <TextContainer>
-                    <p>오늘의 미션</p>
-                    <p>{todayMission.mission} 인증하기!</p>
-                  </TextContainer>
-                </>
-              )}
+          {isComplete ? (
+            <>
+              <ImageContainer>
+                <img src={missionComplete} />
+              </ImageContainer>
+              <TextContainer>
+                <p>오늘의 미션</p>
+                <p>성공!!!!</p>
+              </TextContainer>
+            </>
+          ) : isDueDay ? (
+            todayMission && ( // 개인미션일때는 고정 이미지url , 강아지와 주인이 의욕에 불타는사진
+              <>
+                <ImageContainer>
+                  <img src={todayMission.imageUrl} alt={todayMission.mission} />
+                </ImageContainer>
+                <TextContainer>
+                  <p>오늘의 미션</p>
+                  <p>{todayMission.mission}!</p>
+                </TextContainer>
+              </>
+            )
+          ) : (
+            todayMission && (
+              <>
+                <ImageContainer>
+                  <img src={todayMission.imageUrl} alt={todayMission.mission} />
+                </ImageContainer>
+                <TextContainer>
+                  <p>오늘의 미션</p>
+                  <p>{todayMission.mission} 인증하기!</p>
+                </TextContainer>
+              </>
+            )
+          )}
         </MissionContents>
       </MissionContainer>
-      <SubTitleText>
-        <p>미션 히스토리</p>
-      </SubTitleText>
-      <MissionCalendarComp refresh={isUploaded} />
+      <HistoryContainer>
+        <SubTitleText>
+          <p>미션 히스토리</p>
+        </SubTitleText>
+        <MissionCalendarComp refresh={isUploaded} />
+      </HistoryContainer>
       <input type="file" ref={fileInputRef} style={{ display: 'none' }} accept="image/*" onChange={handleFileUpload} />
     </>
   );

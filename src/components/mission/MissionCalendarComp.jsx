@@ -5,6 +5,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import temp from '@/assets/bath.svg';
 import MissionModalComp from './MissionModalComp';
+import './MissionCalendarComp.css';
 
 function MissionCalendarComp({ refresh }) {
   //TODO : axios get으로 eventsArray 채워주기 + 파일업로드 될때마다 여기로 props 내려줘서 새로고침해주기. /Line:21~
@@ -16,7 +17,7 @@ function MissionCalendarComp({ refresh }) {
       imageurl: temp,
     },
   ]);
-  const [selectedImageUrl, setSelectedImageUrl] = useState(null);
+  const [selectedImageUrl, setSelectedImageUrl] = useState(null); //모달에 props로 내려줌
   const [eventsOnSelectedDate, setEventsOnSelectedDate] = useState([]);
   const [isModal, setIsModal] = useState(false);
 
