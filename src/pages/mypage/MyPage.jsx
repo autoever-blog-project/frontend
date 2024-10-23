@@ -1,8 +1,33 @@
-import React from 'react';
-import { Container, ProfileContainer, ProfileContent, ProfileImageWrapper, ProfileTextWrapper } from './MyPage.style';
+import React, { useEffect, useState } from 'react';
+import {
+  Container,
+  ContentsContainer,
+  ProfileContainer,
+  ProfileContent,
+  ProfileImageWrapper,
+  ProfileMenuWrapper,
+  ProfileTextWrapper,
+  TebContentsWrapper,
+  TebmenuButton,
+  TebmenuWrapper,
+} from './MyPage.style';
 import temp from '@/assets/dogprofile.jpg';
+import MyPageCalendarComp from '../../components/mypage/MyPageCalendarComp';
+
+//TODO : puppy 데이터 init하기
 
 function MyPage() {
+  const [puppyData, setPuppyData] = useState([]);
+  const [activeTab, setActiveTab] = useState(0);
+  const TabData = [
+    { id: 0, button: '내 글 보기' },
+    { id: 1, button: '일정 보기' },
+  ];
+
+  useEffect(() => {}, []);
+
+  const handleTebButton = (i) => setActiveTab(i);
+
   return (
     <>
       <Container>
@@ -17,7 +42,25 @@ function MyPage() {
               <p>20.10.20</p>
             </ProfileTextWrapper>
           </ProfileContent>
+          <ProfileMenuWrapper>
+            <button>탈퇴하기</button>
+          </ProfileMenuWrapper>
         </ProfileContainer>
+        <ContentsContainer>
+          <TebmenuWrapper>
+            {TabData.map((tab) => (
+              <TebmenuButton
+                key={tab.id}
+                onClick={() => {
+                  handleTebButton(tab.id);
+                }}
+              >
+                <p>{tab.button}</p>
+              </TebmenuButton>
+            ))}
+          </TebmenuWrapper>
+          <TebContentsWrapper>{activeTab === 0 ? '1gd' : <MyPageCalendarComp />}</TebContentsWrapper>
+        </ContentsContainer>
       </Container>
     </>
   );

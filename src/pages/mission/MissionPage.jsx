@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MissionContainer, MissionContents, ImageContainer, TextContainer, SubTitleText } from './MissionPage.style';
-import MissionCalendarComp from '@/components/calendar/MissionCalendarComp';
+import MissionCalendarComp from '@/components/mission/MissionCalendarComp';
 import bathImage from '@/assets/bath.svg';
 import axios from 'axios';
+
+//강아지와 주인 개인미션에 넣을사진
 
 //예정일이 없을때 랜덤 미션 리스트
 const missions = [
@@ -12,36 +14,55 @@ const missions = [
 ];
 
 function MissionPage() {
-  const [randomMission, setRandomMission] = useState(null);
+  const [todayMission, setTodayMission] = useState(null);
   const [currentDay, setCurrentDay] = useState(new Date().toDateString());
   const [refresh, setRefresh] = useState(false);
   //setIsDueDay 는 todo도메인 due_date 값이 currentDay으로 필터해서 length가 있으면 true 가 되는 구조 생각중/ 백 로직보고 결정
   const [isDueDay, setIsDueDay] = useState(false);
   //파일업로드 후 캘린더 리프레쉬용
   const [isUploaded, setIsUploaded] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
+  const [todoList, setTodoList] = useState([]);
 
   const fileInputRef = useRef(null);
+
+  const checkDueDay = () => {
+    setCurrentDay(new Date().toDateString());
+
+    //TODO : axios get todo list, setTodoList에 넣어둠
+    //setIsDueDay(todoList.filter((event) => {
+    //  return event.start === selectedDate;
+    //});
+  };
 
   //매일 미션이 갱신되야하므로 날짜, 미션을 로컬스토리지에 저장해두고 day가 다르다면 새로 미션 받는다.
   const loadOrSetMission = () => {
     const savedData = JSON.parse(localStorage.getItem('missionData'));
     const savedDay = savedData?.date;
-    setCurrentDay(new Date().toDateString());
 
     if (savedDay === currentDay) {
-      setRandomMission(savedData.mission);
+      setTodayMission(savedData.mission);
+      return;
+    }
+
+    setIsComplete(false);
+
+    let selected = '';
+
+    // TODO 미션인날
+    if (isDueDay) {
+      //axios로 받아온 todoList[0].contents
     } else {
       const randomIndex = Math.floor(Math.random() * missions.length);
-      const selectedMission = missions[randomIndex];
-      setRandomMission(selectedMission);
-
-      const missionData = {
-        date: currentDay,
-        mission: selectedMission,
-      };
-      localStorage.setItem('missionData', JSON.stringify(missionData));
-      handleRefresh();
+      selected = missions[randomIndex];
+      //setTodayMission(selectedMission);
     }
+    const missionData = {
+      date: currentDay,
+      mission: selected,
+    };
+    localStorage.setItem('missionData', JSON.stringify(missionData));
+    handleRefresh();
   };
 
   const handleRefresh = () => {
@@ -74,6 +95,21 @@ function MissionPage() {
   };
 
   useEffect(() => {
+    // const fetchTodoList = async () => {
+    //   try {
+    //     const response = await axios.get('YOUR_API_URL_HERE');
+    //     setTodoList(response.data);
+    //
+    //     response.data.due_date와 currentDay를 비교하는 로직 후 true false받음
+
+    //     setIsDueDay(hasDueToday);
+    //   } catch (error) {
+    //     console.error('Error fetching todo list:', error);
+    //   }
+    // };
+
+    // fetchTodoList();
+
     loadOrSetMission();
   }, [refresh]);
 
@@ -82,15 +118,25 @@ function MissionPage() {
       <MissionContainer onClick={handleContainerClick}>
         <MissionContents>
           {isDueDay
-            ? null //개인이벤트 상징할만한 사진 필요,
-            : randomMission && (
+            ? todayMission && ( // 개인미션일때는 고정 이미지url , 강아지와 주인이 의욕에 불타는사진
                 <>
                   <ImageContainer>
-                    <img src={randomMission.imageUrl} alt={randomMission.mission} />
+                    <img src={todayMission.imageUrl} alt={todayMission.mission} />
                   </ImageContainer>
                   <TextContainer>
                     <p>오늘의 미션</p>
-                    <p>{randomMission.mission} 인증하기!</p>
+                    <p>{todayMission.mission}!</p>
+                  </TextContainer>
+                </>
+              )
+            : todayMission && (
+                <>
+                  <ImageContainer>
+                    <img src={todayMission.imageUrl} alt={todayMission.mission} />
+                  </ImageContainer>
+                  <TextContainer>
+                    <p>오늘의 미션</p>
+                    <p>{todayMission.mission} 인증하기!</p>
                   </TextContainer>
                 </>
               )}
