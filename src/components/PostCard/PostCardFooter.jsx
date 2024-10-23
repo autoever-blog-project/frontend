@@ -12,8 +12,8 @@ function PostCardFooter({ member, postInfo }) {
           <S.PostCardOwnerProfileImg src="" />
           <div>{member.nickname}</div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 20 }}>
-          <div style={{ paddingTop: 4, width: 15, height: 15, overflow: 'hidden' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 20, gap: 7 }}>
+          <div style={{ width: 15, height: 15, overflow: 'hidden' }}>
             <S.PostCardTotalHeart src={postInfo.like_heart === 1000 ? heartFill : heartBlank} />
           </div>
           <div>{postInfo.like_heart === 0 ? ' ' : postInfo.like_heart}</div>

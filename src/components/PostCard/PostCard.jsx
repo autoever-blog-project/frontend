@@ -7,8 +7,10 @@ import image from '@/assets/0.png';
 //Img 경로 수정
 function PostCard({ postInfo, member }) {
   return (
-    <div>
+    //detailView로 이동
+    <div onClick={() => {}}>
       <S.PostCardContainer>
+        <S.PostCardOverlay className="overlay" />
         <S.PostCardImg src={image} />
         <PostCardBody postInfo={postInfo} />
         <PostCardFooter postInfo={postInfo} member={member} />

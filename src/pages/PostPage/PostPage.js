@@ -53,7 +53,7 @@ export const PostPagePaginationContainer = styled.div`
 
 export const PostPagePaginationButton = styled.button`
   margin: 0 5px;
-  padding: 10px;
+  padding: 15px;
   border: none;
   border-radius: 10px;
   background-color: transparent;
@@ -69,13 +69,13 @@ export const PostPagePaginationButton = styled.button`
   &:disabled {
     background-color: gray;
     color: white;
-    cursor: not-allowed;
+    cursor: default;
   }
 `;
 
 export const PostPagePaginationArrowButton = styled.button`
   margin: 0 5px;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
   cursor: pointer;
   border: none;
@@ -89,6 +89,6 @@ export const PostPagePaginationArrowButton = styled.button`
 
   &:disabled {
     color: gray;
-    cursor: not-allowed;
+    cursor: default;
   }
 `;

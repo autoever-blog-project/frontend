@@ -5,9 +5,33 @@ export const PostCardContainer = styled.div`
   height: 350px;
   background-color: white;
   border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  &:hover .overlay {
+    opacity: 0.5;
+  }
+  &:active .overlay {
+    opacity: 0.8;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
 `;
 
 //PostCard 구성요소
+
+export const PostCardOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: 'opacity 0.3s ease';
+`;
 
 export const PostCardImg = styled.img`
   width: 100%;
