@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import {
   CardContent,
   CardContentsWrapper,
+  CardImageWrapper,
   CardProfileWrapper,
   CardTitleWrapper,
   MyPagePostCard,
   MyPagePostList,
 } from './MyPagePostComp.style';
+import tmp from '@/assets/dogprofile.jpg'
 
 const initState = {
   dtoList: [],
@@ -31,7 +33,7 @@ function MyPagePostComp() {
   return (
     <>
       <MyPagePostList>
-        {data.dtoList.map((item, i) => {
+        {/* {data.dtoList.map((item, i) => {
           return (
             <MyPagePostCard
               key={i}
@@ -49,11 +51,35 @@ function MyPagePostComp() {
                   <img src={item.emoji}></img>
                   <p>{item.title}</p>
                 </CardTitleWrapper>
-                <CardContent></CardContent>
+                <CardContent>
+                  <p>{item.content}</p>
+                </CardContent>
               </CardContentsWrapper>
+              <CardImageWrapper>
+                <img src={item.img}></img>
+              </CardImageWrapper>
             </MyPagePostCard>
           );
-        })}
+        })} */}
+        <MyPagePostCard>
+        <CardContentsWrapper>
+          <CardProfileWrapper>
+          <img src={tmp}></img>
+          <h2>홀란드</h2>
+          <p>24-10-23</p>
+          </CardProfileWrapper>
+          <CardTitleWrapper>
+            <img src={tmp}></img>
+            <p>프로필 사진 찍은 날 이에요</p>
+          </CardTitleWrapper>
+          <CardContent>
+            <p>프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용</p>
+          </CardContent>
+        </CardContentsWrapper>
+        <CardImageWrapper>
+          <img src={tmp}></img>
+        </CardImageWrapper>
+        </MyPagePostCard>
       </MyPagePostList>
     </>
   );

@@ -133,7 +133,7 @@ function MissionPage() {
               </ImageContainer>
               <TextContainer>
                 <p>오늘의 미션</p>
-                <p>성공!!!!</p>
+                <p>완료!!!!</p>
               </TextContainer>
             </>
           ) : isDueDay ? (
