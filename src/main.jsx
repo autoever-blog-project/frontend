@@ -10,7 +10,6 @@ const AppWrapper = styled.div`
   min-height: 100dvh;
   max-width: var(--app-max-width, 1024px);
   margin: 0 auto;
-  border: 1px dotted pink;
 `;
 
 const queryClient = new QueryClient();
