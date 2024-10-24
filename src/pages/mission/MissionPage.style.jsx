@@ -4,6 +4,7 @@ export const MissionContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: white;
+  margin-top: 80px;
   :hover {
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0.3);

@@ -25,3 +25,7 @@ export const fetchPostUpdate = async () => {
 export const fetchPostDelete = async () => {
   return await authenticated.post('url', 'postId');
 };
+
+export const fetchTodoList = async () => {
+  return await authenticated.get('mission/calendar/list');
+};

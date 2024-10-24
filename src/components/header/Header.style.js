@@ -10,6 +10,7 @@ export const HeaderWrapper = styled.header`
   background-color: ${theme.colors.bgBlue};
   display: flex;
   align-items: center;
+  z-index: 9999;
 `;
 
 export const HeaderContainer = styled.div`
