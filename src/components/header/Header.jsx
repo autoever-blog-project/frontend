@@ -48,7 +48,7 @@ export const Header = () => {
           accessToken: accessToken,
           refreshToken: refreshToken,
         });
-        localStorage.setItem('memeber_id', response.data.member_id);
+        localStorage.setItem('member_id', response.data.member_id);
         navigate('/'); // 로그인 후 홈으로 이동
       }
     };
