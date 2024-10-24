@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 
 const isAuthenticated = () => {
-  const token = localStorage.getItem('ACCESS_TOKEN');
+  const token = localStorage.getItem('actk');
   return !!token;
 };
 

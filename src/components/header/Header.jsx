@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as S from './Header.style';
 import Logo from '@/assets/logo.png';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -8,33 +8,52 @@ export const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // 페이지 경로 확인
   const isCurrentPath = (path) => {
     return location.pathname === '/' + path;
   };
 
-  // TODO: 토큰 확인 후 로그인 되어 있는 경우와 없는 경우로 처리
+  // 페이지 이동
   const handleMovePageClick = (path) => {
     navigate(path);
   };
 
+  // 카카오 로그인 클릭 처리
   const handleLoginClick = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=72ca8d5c3abeee717446fc97a3749656&redirect_uri=http://localhost:8080/login/oauth/kakao`;
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d8fabac493f22b719a1bc4f29b44c9d1&redirect_uri=http://localhost:8080/login/oauth/kakao`;
+  };
 
+  // 로그아웃 클릭 처리
+  const handleLogoutClick = () => {
+    // TODO: 로그아웃 API 연동
+    localStorage.removeItem('actk');
+    localStorage.removeItem('rftk');
+    setIsLogin(false);
+  };
+
+  // URL에서 토큰 추출 및 상태 업데이트
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
     const accessToken = params.get('accessToken');
     const refreshToken = params.get('refreshToken');
 
     if (accessToken && refreshToken) {
       localStorage.setItem('actk', accessToken);
       localStorage.setItem('rftk', refreshToken);
-
-      setIsLogin(true);
-      window.location.href = 'http://localhost:5173/';
+      setIsLogin(true); // 로그인 상태 업데이트
+      navigate('/'); // 로그인 후 홈으로 이동
     }
-  };
+  }, [location.search, navigate]);
 
-  const handleLogoutClick = () => {
-    // TODO: 로그아웃 API 연동
-  };
+  // 컴포넌트 마운트 시 로컬 스토리지 확인
+  useEffect(() => {
+    const accessToken = localStorage.getItem('actk');
+    const refreshToken = localStorage.getItem('rftk');
+
+    if (accessToken && refreshToken) {
+      setIsLogin(true); // 로그인 상태 업데이트
+    }
+  }, []);
 
   return (
     <S.HeaderWrapper>
