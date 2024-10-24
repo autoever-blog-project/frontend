@@ -37,3 +37,9 @@ export const fetchTodoWrite = async (data) => {
 export const fetchTodoList = async () => {
   return await authenticated.get('todo/list');
 };
+
+// 강아지 정보 등록하기
+
+export const fetchPuppyWrite = async (data) => {
+  return await authenticated.post('puppy', data);
+};
