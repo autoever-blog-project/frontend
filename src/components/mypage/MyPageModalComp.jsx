@@ -1,29 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { fetchTodoWrite } from '@/api/detail'; // fetchTodoWrite 경로를 수정하세요
 
 function MyPageModalComp({ onClose, eventList, selectDay }) {
   const [newEvent, setNewEvent] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+
+  useEffect(() => {
+    const formatted = parseInt(selectDay.substr(8, 2));
+    setSelectedDate(formatted);
+  }, [selectDay]); // Dependency array 추가
 
   const handleClose = () => {
     onClose(false);
   };
 
-  const handleAddEvent = () => {
-    // 새로운 이벤트 추가 로직
+  const handleAddEvent = async () => {
     console.log(`Adding event: ${newEvent}`);
-    setNewEvent(''); // 입력 필드 초기화
+
+    const data = {
+      title: '고정 더미값',
+      content: newEvent,
+      dueDate: selectDay,
+      status: false,
+    };
+
+    try {
+      await fetchTodoWrite(data);
+      console.log('Event added successfully');
+      setNewEvent(''); // 입력 필드 초기화
+    } catch (error) {
+      console.error('Error adding event:', error);
+    }
   };
 
   return (
     <Overlay>
       <ModalWrap>
         <Contents>
-          <h1>{selectDay}일에 할일</h1>
+          <h1>{selectedDate}일에 할일</h1>
           {eventList && eventList.length > 0 ? (
             <EventList>
               {eventList.map((event, index) => (
-                <EventTextWrapper>
-                  <p key={index}>{event.title}</p>
+                <EventTextWrapper key={index}>
+                  <p>{event.title}</p>
                 </EventTextWrapper>
               ))}
             </EventList>

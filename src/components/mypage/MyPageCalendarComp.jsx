@@ -49,7 +49,7 @@ function MyPageCalendarComp() {
     });
     setEventList(eventsOnSelectedDate);
     const formatted = parseInt(selectedDate.substr(8, 2));
-    setSelectEventDay(formatted);
+    setSelectEventDay(selectedDate);
     setIsModal(true);
   };
   useEffect(() => {
