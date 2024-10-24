@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useEffect } from 'react';
 import * as S from './Header.style';
 import Logo from '@/assets/logo.png';
 import { useLocation, useNavigate } from 'react-router-dom';
