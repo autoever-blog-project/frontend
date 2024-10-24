@@ -28,7 +28,7 @@ function MainPage() {
         <SearchBar />
         <S.SwiperSliderContainer>
           <S.SwiperSliderContainerTitle>좋아요 많이 받은 게시글</S.SwiperSliderContainerTitle>
-          <div style={{ width: '95%' }}>
+          <S.SwiperSliderPostContainer>
             <Swiper
               spaceBetween={30}
               slidesPerView={3}
@@ -44,11 +44,11 @@ function MainPage() {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
+          </S.SwiperSliderPostContainer>
         </S.SwiperSliderContainer>
         <S.SwiperSliderContainer>
           <S.SwiperSliderContainerTitle>최신 게시글</S.SwiperSliderContainerTitle>
-          <div style={{ width: '95%' }}>
+          <S.SwiperSliderPostContainer>
             <Swiper
               spaceBetween={30}
               slidesPerView={3}
@@ -64,7 +64,7 @@ function MainPage() {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
+          </S.SwiperSliderPostContainer>
         </S.SwiperSliderContainer>
       </S.MainViewBodyContainer>
     </div>

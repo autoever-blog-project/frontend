@@ -29,3 +29,7 @@ export const SwiperSliderContainerTitle = styled.p`
   font-weight: 700;
   font-size: 30px;
 `;
+
+export const SwiperSliderPostContainer = styled.div`
+  width: 95%;
+`;

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './TagButtonStyle.js';
 
-function TagButton({ tag, submitTag }) {
-  const [clicked, setClicked] = useState(false);
+function TagButton({ tag, submitTag, already }) {
+  const [clicked, setClicked] = useState(already);
   return (
     <div
       style={{ width: 'fit-content' }}
@@ -12,7 +12,7 @@ function TagButton({ tag, submitTag }) {
         submitTag(tag);
       }}
     >
-      <S.TagButtonContainer $clicked={clicked}>
+      <S.TagButtonContainer $clicked={already}>
         <S.TagButtonOverlay className="overlay" />
         {tag}
       </S.TagButtonContainer>

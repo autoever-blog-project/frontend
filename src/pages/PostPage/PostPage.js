@@ -41,54 +41,17 @@ export const PostPagePostGridContainer = styled.div`
   min-height: 720px;
 `;
 
-//dropDown
-
-//pagination
-
-export const PostPagePaginationContainer = styled.div`
+//grid
+export const PostPagePostGridPostCardContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  align-items: flex-start;
 `;
 
-export const PostPagePaginationButton = styled.button`
-  margin: 0 5px;
-  padding: 15px;
-  border: none;
-  border-radius: 10px;
-  background-color: transparent;
-  color: black;
-  font-size: 15px;
-  cursor: pointer;
+//dropDown
 
-  &:enabled:hover {
-    background-color: gray;
-    color: white;
-  }
-
-  &:disabled {
-    background-color: gray;
-    color: white;
-    cursor: default;
-  }
-`;
-
-export const PostPagePaginationArrowButton = styled.button`
-  margin: 0 5px;
-  padding: 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  font-size: 15px;
-  font-weight: 600;
-  &:enabled:hover {
-    background-color: gray;
-    color: white;
-  }
-
-  &:disabled {
-    color: gray;
-    cursor: default;
-  }
+export const PostPageDropDownContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 `;

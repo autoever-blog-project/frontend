@@ -1,42 +1,50 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import * as S from './WritePageStyle.js';
-import { useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 
-function WritePageEditor() {
+const WritePageEditor = forwardRef(({ defaultValue }, ref) => {
   const editorRef = useRef();
-  const [editorHtml, setEditorHtml] = useState('');
+  const [editorHtml, setEditorHtml] = useState();
   const [isVisible, setIsVisble] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const handleChange = (html) => {
-    setEditorHtml(html); // 에디터의 내용을 상태로 저장
+    setEditorHtml(html);
   };
-
+  useImperativeHandle(ref, () => ({
+    getContent: () => {
+      return editorRef.current.props.value;
+    },
+  }));
+  useEffect(() => {
+    setEditorHtml(`<p>${defaultValue}</p>`);
+    console.log(defaultValue);
+  }, []);
   const modules = {
     toolbar: [
-      [{ header: [1, 2, 3, false] }], // 제목 크기
-      ['bold', 'italic', 'underline'], // 스타일 버튼
-      [{ list: 'ordered' }, { list: 'bullet' }], // 리스트
-      ['clean'], // 포맷 초기화 버튼
+      [{ header: [1, 2, 3, false] }],
+      ['bold', 'italic', 'underline'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      ['clean'],
     ],
   };
   return (
     <S.WritePageEditorContainer
-      isHovered={isVisible}
-      isFocused={isFocused}
+      $isHovered={isVisible}
+      $isFocused={isFocused}
       onMouseEnter={() => setIsVisble(true)}
       onMouseLeave={() => setIsVisble(false)}
     >
       <ReactQuill
+        ref={editorRef}
         value={editorHtml}
         onChange={handleChange}
         placeholder="내용을 입력하세요..."
         modules={modules}
         onFocus={() => setIsFocused(true)}
-        // onBlur={() => setIsFocused(false)}
       />
     </S.WritePageEditorContainer>
   );
-}
-
+});
+WritePageEditor.displayName = 'WritePageEditor';
 export default WritePageEditor;

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import * as S from './PostPage.js';
+import * as S from './PostPagePagination.js';
 
 function PostPagePagination({ beforeCurrentPage, currentPage, totalPages }) {
   return (

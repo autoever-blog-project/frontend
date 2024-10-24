@@ -10,7 +10,7 @@ export const WritePageViewContainer = styled.div`
   padding-top: 20px;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-end;
   flex-direction: column;
 `;
 
@@ -26,22 +26,21 @@ export const WritePageTextInput = styled.input`
   border: none;
   background-color: white;
   outline: transparent;
-  border-bottom: 2px solid gray;
-  &:focus {
-    border-bottom: 2px solid black;
-  }
+  border-bottom: 1px solid black;
+  padding-left: 10px;
 `;
 
 export const WritePageRadioContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
-  height: 100px;
+  height: 120px;
   padding-bottom: 20px;
+  border-bottom: 1px solid black;
   padding-top: 20px;
   display: flex;
   justify-content: flex-start;
-  flex-direction: row;
-  gap: 30px;
+  flex-direction: column;
+  gap: 10px;
 `;
 export const WritePageTagContainer = styled.div`
   width: 100%;
@@ -49,16 +48,19 @@ export const WritePageTagContainer = styled.div`
   height: 80px;
   padding-bottom: 20px;
   padding-top: 20px;
+  padding-left: 15px;
+  border-bottom: 1px solid black;
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  border: none;
   gap: 10px;
 `;
 
 export const WritePageEditorContainer = styled.div`
   width: 100%;
   height: 300px;
+  box-sizing: border-box;
+  border-bottom: 1px solid black;
   .quill {
     height: 250px;
   }
@@ -67,10 +69,10 @@ export const WritePageEditorContainer = styled.div`
     overflow: hidden;
   }
   .ql-toolbar {
+    display: none;
     border-radius: 10px;
     /* display: flex; */
-    visibility: ${(props) =>
-      props.isHovered || props.isFocused ? 'visible' : 'hidden'}; /* hover 상태에 따라 보이기 */
+    /* display: ${(props) => (props.$isHovered || props.$isFocused ? 'block' : 'none')}; */
     transition: opacity 1s ease;
   }
 
@@ -103,6 +105,36 @@ export const WritePageImgContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const WritePageSubmitButton = styled.button`
+  border: 1px solid ${(props) => (props.$clicked ? 'red' : 'black')};
+  color: ${(props) => (props.$clicked ? 'red' : 'black')};
+
+  border-radius: 13px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 30px;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  &:hover {
+    color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  &:hover .overlay {
+    opacity: 0.5;
+  }
+  &:active .overlay {
+    opacity: 0.8;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
 `;
 
 //WritePageRadioContainer 구성 요소
@@ -113,13 +145,17 @@ export const WritePageRadioInputContainer = styled.div`
   justify-content: space-between;
   flex-direction: row;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 //WritePageImgContainer 구성요소
 
 export const WritePageImgSubmitContainer = styled.div`
   width: 200px;
-  height: 200px;
+  height: ${(props) => (props.$isPreview ? '0px' : '200px')};
+  visibility: ${(props) => (props.$isPreview ? 'hidden' : 'visible')}; /* hover 상태에 따라 보이기 */
   border: 1px solid black;
   border-radius: 10px;
   display: flex;

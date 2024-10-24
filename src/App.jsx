@@ -5,8 +5,9 @@ import WritePage from './pages/WritePage/WritePage';
 function App() {
   return (
     <div>
-      <WritePage></WritePage>
+      <WritePage beforeContent={{}}></WritePage>
       {/* <PostPage></PostPage> */}
+      {/* <MainPage></MainPage> */}
     </div>
   );
 }

@@ -107,6 +107,7 @@ export const PostCardOwnerProfileImg = styled.img`
   width: 28px;
   height: 28px;
   object-fit: cover;
+  border-radius: 50%;
 `;
 
 export const PostCardTotalHeart = styled.img`

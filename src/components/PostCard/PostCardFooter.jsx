@@ -2,6 +2,7 @@
 import * as S from './PostCardStyle.js';
 import heartFill from '@/assets/Heartfill.svg';
 import heartBlank from '@/assets/Heartblank.svg';
+import imge from '@/assets/0.png';
 
 function PostCardFooter({ member, postInfo }) {
   return (
@@ -9,7 +10,7 @@ function PostCardFooter({ member, postInfo }) {
       <S.PostCardFooterContainer>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           {/* 사용자의 프로필 이미지 불러와서 넣기 */}
-          <S.PostCardOwnerProfileImg src="" />
+          <S.PostCardOwnerProfileImg src={imge} />
           <div>{member.nickname}</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 20, gap: 7 }}>

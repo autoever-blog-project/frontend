@@ -50,14 +50,14 @@ function PostPage() {
             ))}
           </S.PostPageTagButtonListContainer>
         </S.PostPageTopContainer>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+        <S.PostPageDropDownContainer>
           <DropDown submitSort={sortBy} />
-        </div>
+        </S.PostPageDropDownContainer>
         <S.PostPagePostGridContainer>
           {currentItems.map((item, idx) => (
-            <div key={idx} style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+            <S.PostPagePostGridPostCardContainer key={idx}>
               <PostCard postInfo={item} member={member} />
-            </div>
+            </S.PostPagePostGridPostCardContainer>
           ))}
         </S.PostPagePostGridContainer>
         <PostPagePagination beforeCurrentPage={currentPage} currentPage={handleCurrentPage} totalPages={totalPages} />
