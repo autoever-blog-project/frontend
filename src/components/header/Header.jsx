@@ -1,4 +1,4 @@
-import { useState, useEffect, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import * as S from './Header.style';
 import Logo from '@/assets/logo.png';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -48,7 +48,7 @@ export const Header = () => {
           accessToken: accessToken,
           refreshToken: refreshToken,
         });
-        console.log(response.data.member_id);
+        localStorage.setItem('memeber_id', response.data.member_id);
         navigate('/'); // 로그인 후 홈으로 이동
       }
     };
