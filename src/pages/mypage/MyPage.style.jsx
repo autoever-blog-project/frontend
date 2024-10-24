@@ -80,9 +80,9 @@ export const TebmenuButton = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-color: ${({ isSelected }) => (isSelected ? '#fff' : '#f9f9f9')};
-  border: ${({ isSelected }) => (isSelected ? '' : '3px solid #B8B8B8')};
-  border-top: ${({ isSelected }) => (isSelected ? '3px solid #B8B8B8' : '')};
+  background-color: ${({ $isSelected }) => ($isSelected ? '#fff' : '#f9f9f9')};
+  border: ${({ $isSelected }) => ($isSelected ? '' : '3px solid #B8B8B8')};
+  border-top: ${({ $isSelected }) => ($isSelected ? '3px solid #B8B8B8' : '')};
   p {
     font-size: 20px;
     font-style: normal;

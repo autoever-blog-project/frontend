@@ -88,7 +88,7 @@ function MyPage() {
                 onClick={() => {
                   handleTebButton(tab.id);
                 }}
-                isSelected={activeTab === tab.id}
+                $isSelected={activeTab === tab.id}
               >
                 <p>{tab.button}</p>
               </TebmenuButton>

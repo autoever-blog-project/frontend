@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import MyPageModalComp from './MyPageModalComp';
+import { fetchTodoList } from '../../api/detail';
 
 function MyPageCalendarComp() {
   const [eventsArray, setEventsArray] = useState([
@@ -24,6 +25,7 @@ function MyPageCalendarComp() {
       },
     },
   ]);
+  const [refresh, setRefresh] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const [eventList, setEventList] = useState([]);
   const [selectEventDay, setSelectEventDay] = useState('');
@@ -41,6 +43,10 @@ function MyPageCalendarComp() {
     console.log(newEvent);
   };
 
+  const handleRefresh = () => {
+    setRefresh(!refresh);
+  };
+
   const handleDateClick = (info) => {
     const selectedDate = info.dateStr;
 
@@ -48,13 +54,31 @@ function MyPageCalendarComp() {
       return event.start === selectedDate;
     });
     setEventList(eventsOnSelectedDate);
-    const formatted = parseInt(selectedDate.substr(8, 2));
     setSelectEventDay(selectedDate);
     setIsModal(true);
   };
   useEffect(() => {
-    // setEventsArray()
-  }, [eventsArray]);
+    const fetchData = async () => {
+      try {
+        const todoList = await fetchTodoList(); // 여러 개의 항목을 가져옴
+        console.log(todoList);
+        const events = todoList.data.map((item) => ({
+          title: item.content,
+          start: item.dueDate,
+          allDay: true,
+          extendedProps: {
+            status: item.status,
+          },
+        })); // 각 항목에서 필요한 속성만 추출
+        setEventsArray(events); // 추출한 데이터를 상태에 설정
+      } catch (error) {
+        console.error('Error list event:', error);
+      }
+    };
+
+    fetchData();
+    console.log(eventsArray);
+  }, [refresh]);
 
   const handleEventClick = (arg) => {
     arg.jsEvent.preventDefault();
@@ -85,7 +109,14 @@ function MyPageCalendarComp() {
           right: 'dayGridMonth,timeGridWeek',
         }}
       />
-      {isModal && <MyPageModalComp onClose={closeModal} eventList={eventList} selectDay={selectEventDay} />}
+      {isModal && (
+        <MyPageModalComp
+          onClose={closeModal}
+          eventList={eventList}
+          selectDay={selectEventDay}
+          handleRefresh={handleRefresh}
+        />
+      )}
     </div>
   );
 }

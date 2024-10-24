@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { fetchTodoWrite } from '@/api/detail'; // fetchTodoWrite 경로를 수정하세요
 
-function MyPageModalComp({ onClose, eventList, selectDay }) {
+function MyPageModalComp({ onClose, eventList, selectDay, handleRefresh }) {
   const [newEvent, setNewEvent] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
 
@@ -19,8 +19,9 @@ function MyPageModalComp({ onClose, eventList, selectDay }) {
     console.log(`Adding event: ${newEvent}`);
 
     const data = {
-      title: '고정 더미값',
+      title: 'aaa',
       content: newEvent,
+      memberId: localStorage.getItem('member_id'),
       dueDate: selectDay,
       status: false,
     };
@@ -28,7 +29,8 @@ function MyPageModalComp({ onClose, eventList, selectDay }) {
     try {
       await fetchTodoWrite(data);
       console.log('Event added successfully');
-      setNewEvent(''); // 입력 필드 초기화
+      setNewEvent('');
+      handleRefresh();
     } catch (error) {
       console.error('Error adding event:', error);
     }
