@@ -47,17 +47,7 @@ export default function CustomizedSelects({ submitSort }) {
   return (
     <div>
       <FormControl variant="standard">
-        <Select
-          value={sort}
-          input={<BootstrapInput />}
-          onChange={handleChange}
-          style={{ width: '120px' }}
-          sx={{
-            '& .MuiMenuItem-root:hover': {
-              backgroundColor: 'gray', // hover 시 배경색 변경
-            },
-          }}
-        >
+        <Select value={sort} input={<BootstrapInput />} onChange={handleChange} style={{ width: '120px' }}>
           {/* 홍빈이형이랑 연결 시 색 변경 */}
           <MenuItem value={'최신 순'} style={{ backgroundColor: sort === '최신 순' ? 'gray' : 'white' }}>
             최신 순

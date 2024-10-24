@@ -21,7 +21,7 @@ function MainPage() {
     nickname: '송지웅',
   };
   //게시글 정보 리스트
-  const postInfos = new Array(5).fill(postInfo);
+  const postInfos = new Array(6).fill(postInfo);
   return (
     <div>
       <S.MainViewBodyContainer>
@@ -30,10 +30,12 @@ function MainPage() {
           <S.SwiperSliderContainerTitle>좋아요 많이 받은 게시글</S.SwiperSliderContainerTitle>
           <S.SwiperSliderPostContainer>
             <Swiper
-              spaceBetween={30}
+              spaceBetween={0}
               slidesPerView={3}
               loop={true}
               navigation={true}
+              centeredSlides={true}
+              // loopAdditionalSlides={3}
               pagination={{
                 type: 'fraction',
               }}
@@ -50,7 +52,7 @@ function MainPage() {
           <S.SwiperSliderContainerTitle>최신 게시글</S.SwiperSliderContainerTitle>
           <S.SwiperSliderPostContainer>
             <Swiper
-              spaceBetween={30}
+              spaceBetween={0}
               slidesPerView={3}
               loop={true}
               navigation={true}

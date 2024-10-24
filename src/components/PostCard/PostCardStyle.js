@@ -55,8 +55,8 @@ export const PostCardFooterContainer = styled.div`
   width: (100%-20px);
   height: (45) px;
   display: flex;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
   /* padding-bottom: 15px; */
   align-items: center;
   margin: 0 auto;

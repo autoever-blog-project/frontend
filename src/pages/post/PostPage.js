@@ -6,7 +6,7 @@ export const PostPageViewBodyContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 20px;
+  padding-top: 100px;
   gap: 10px;
 `;
 

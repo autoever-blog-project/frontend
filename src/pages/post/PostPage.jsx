@@ -5,11 +5,13 @@ import PostCard from '@/components/PostCard/PostCard.jsx';
 import DropDown from '@/components/DropDown/DropDown.jsx';
 import PostPagePagination from './PostPagePagination.jsx';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function PostPage() {
   //태그 리스트
   const tags = ['전체', '강아지', '여행qweqeqweqweq'];
-
+  const inputData = useLocation().state?.searchData || '';
+  //inputData로 검색 날리기
   //더미 데이터
   const postInfo = {
     title: 'qwiTw',
@@ -34,24 +36,26 @@ function PostPage() {
   const currentItems = postInfos.slice(startIndex, startIndex + itemsPerPage);
   const totalPages = Math.ceil(postInfos.length / itemsPerPage);
   const handleCurrentPage = (now) => {
-    console.log(now);
     setCurrentPage(now);
   };
-  //postInfos sort하는 기능 (api랑 연동시 제작)
-  const sortBy = () => {};
+  const [selectedTag, setSelectedTag] = useState('');
+  const sortByTag = (tag) => {
+    setSelectedTag(tag);
+    //postInfos sort하는 기능 (api랑 연동시 제작)
+  };
   return (
     <div>
       <S.PostPageViewBodyContainer>
         <S.PostPageTopContainer>
-          <SearchBar />
+          <SearchBar defaultValue={inputData} />
           <S.PostPageTagButtonListContainer>
             {tags.map((item, idx) => (
-              <TagButton key={idx} tag={item} />
+              <TagButton key={idx} tag={item} submitTag={(tag) => sortByTag(tag)} already={item === selectedTag} />
             ))}
           </S.PostPageTagButtonListContainer>
         </S.PostPageTopContainer>
         <S.PostPageDropDownContainer>
-          <DropDown submitSort={sortBy} />
+          <DropDown submitSort={sortByTag} />
         </S.PostPageDropDownContainer>
         <S.PostPagePostGridContainer>
           {currentItems.map((item, idx) => (

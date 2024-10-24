@@ -1,11 +1,11 @@
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-
 import { ProtectedRoute } from './components/ProtectedRoute.jsx';
 import MissionPage from './pages/mission/MissionPage.jsx';
 import { Header } from './components/header/Header.jsx';
 import MainPage from './pages/main/MainPage.jsx';
+import PostPage from './pages/post/PostPage.jsx';
+import WritePage from './pages/write/WritePage.jsx';
 // import { PostDetail } from './pages/postdetail/PostDetail.jsx';
-
 
 function App() {
   const router = createBrowserRouter([
@@ -23,22 +23,19 @@ function App() {
         },
         {
           path: '/mission',
-          element: (
-            <ProtectedRoute>
-              <MissionPage />
-            </ProtectedRoute>
-          ),
+          element: <MissionPage />,
         },
+        { path: '/post', element: <PostPage /> },
+        { path: '/write', element: <WritePage /> },
         // {
         //   path: '/detail',
         //   element: <PostDetail />,
         // },
 
-        {
-          path: '/mypage',
-          element: <MyPage />,
-        },
-
+        // {
+        //   path: '/mypage',
+        //   element: <MyPage />,
+        // },
       ],
     },
   ]);

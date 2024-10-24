@@ -2,11 +2,17 @@ import styled from 'styled-components';
 
 export const MissionContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 500px;
   background-color: white;
   margin-top: 80px;
+`;
+
+export const MissionOverlay = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: transparent;
   :hover {
-    z-index: 1000;
     background-color: rgba(0, 0, 0, 0.3);
   }
 `;
@@ -22,11 +28,13 @@ export const MissionContents = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  margin-bottom: 20px;
-
+  /* margin-bottom: 20px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   img {
-    width: 300px;
-    height: 300px;
+    width: 150px;
+    height: 150px;
   }
 `;
 
