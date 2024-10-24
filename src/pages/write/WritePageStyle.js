@@ -7,7 +7,7 @@ export const WritePageViewContainer = styled.div`
   box-sizing: border-box;
   //height 수정해야함
   max-height: 1000px;
-  padding-top: 20px;
+  padding-top: 190px;
   display: flex;
   justify-content: center;
   align-items: flex-end;

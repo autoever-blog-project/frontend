@@ -82,7 +82,7 @@ function WritePage() {
           {/* 라디오 선택시 효과 및 선택값 보여주기 */}
           <WritePageRadio defaultEmoji={''} />
         </form>
-        <WritePageTag onSubmitTags={handleSubmitTag} defaultTags={['전체']} />
+        <WritePageTag onSubmitTags={handleSubmitTag} defaultTags={[]} />
         <WritePageEditor defaultValue={''} ref={contentRef} />
         <WritePageImage ref={imgRef} />
         <S.WritePageSubmitButton
