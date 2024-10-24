@@ -15,6 +15,14 @@ function MyPageCalendarComp() {
         status: false,
       },
     },
+    {
+      title: '생일축하해주기',
+      start: '2024-10-23',
+      allDay: true,
+      extendedProps: {
+        status: false,
+      },
+    },
   ]);
   const [isModal, setIsModal] = useState(false);
   const [eventList, setEventList] = useState([]);

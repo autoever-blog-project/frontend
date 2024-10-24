@@ -22,11 +22,15 @@ function MyPageModalComp({ onClose, eventList, selectDay }) {
           {eventList && eventList.length > 0 ? (
             <EventList>
               {eventList.map((event, index) => (
-                <p key={index}>{event.title}</p>
+                <EventTextWrapper>
+                  <p key={index}>{event.title}</p>
+                </EventTextWrapper>
               ))}
             </EventList>
           ) : (
-            <p>일정을 추가해 보세요!</p>
+            <EventList>
+              <p>일정을 추가해 보세요!</p>
+            </EventList>
           )}
           <InputContainer>
             <input
@@ -81,7 +85,7 @@ const Contents = styled.div`
 `;
 
 const EventList = styled.div`
-  max-height: 200px;
+  height: 200px;
   overflow-y: auto;
   margin-bottom: 20px;
 
@@ -118,6 +122,15 @@ const Button = styled.button`
   &:hover {
     background-color: #898989;
   }
+`;
+
+const EventTextWrapper = styled.div`
+  width: 100%;
+  height: 25px;
+  background-color: pink;
+  font-weight: 500;
+  display: flex;
+  margin-bottom: 5px;
 `;
 
 export default MyPageModalComp;

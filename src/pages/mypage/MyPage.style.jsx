@@ -9,7 +9,7 @@ export const ProfileContainer = styled.div`
   width: 100%;
   height: 370px;
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 `;
 
 export const ProfileContent = styled.div`
@@ -20,13 +20,13 @@ export const ProfileContent = styled.div`
 `;
 
 export const ProfileImageWrapper = styled.div`
-  width: 370px;
-  height: 370px;
+  width: 300px;
+  height: 300px;
   border-radius: 100%;
 
   img {
-    width: 370px;
-    height: 370px;
+    width: 300px;
+    height: 300px;
     padding: 5px;
     border-radius: 100%;
   }
@@ -46,19 +46,17 @@ export const ProfileTextWrapper = styled.div`
   }
 `;
 
-export const ProfileMenuWrapper = styled.div`
+export const ProfileGraphWrapper = styled.div`
   width: calc(100% - 600px);
-  height: 370px;
+  height: 320px;
   display: flex;
   justify-content: end;
+`;
 
-  button {
-    width: 80px;
-    height: 25px;
-    align-self: end;
-    background-color: red;
-    border: none;
-    border-radius: 5px;
+export const ProfileGraphTitle = styled.div`
+  width: calc(100% - 600px);
+  height: 50px;
+  p {
   }
 `;
 
@@ -95,4 +93,14 @@ export const TebContentsWrapper = styled.div`
   width: 100%;
   height: 100%;
   //background-color: green;
+`;
+
+export const MemberDeleteButton = styled.button`
+  width: 80px;
+  height: 25px;
+  align-self: end;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  float: right;
 `;

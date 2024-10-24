@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.13.0",
     "@fullcalendar/react": "^6.1.15",
     "@mui/material": "^6.1.4",
+    "@nivo/line": "^0.87.0",
     "axios": "^1.7.7",
     "fullcalendar": "^6.1.15",
     "react": "^18.3.1",

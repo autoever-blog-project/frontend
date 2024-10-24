@@ -5,15 +5,18 @@ import {
   ProfileContainer,
   ProfileContent,
   ProfileImageWrapper,
-  ProfileMenuWrapper,
+  ProfileGraphWrapper,
   ProfileTextWrapper,
   TebContentsWrapper,
   TebmenuButton,
   TebmenuWrapper,
+  MemberDeleteButton,
+  ProfileGraphTitle,
 } from './MyPage.style';
 import temp from '@/assets/dogprofile.jpg';
 import MyPageCalendarComp from '../../components/mypage/MyPageCalendarComp';
 import MyPagePostComp from '../../components/mypage/MyPagePostComp';
+import MyPageGraghComp from '../../components/mypage/MyPageGraghComp';
 
 //TODO : puppy 데이터 init하기
 
@@ -24,6 +27,36 @@ function MyPage() {
     { id: 0, button: '내 글 보기' },
     { id: 1, button: '일정 보기' },
   ];
+  //id : puppy.name  data{x : puppy_weight.uploadDate , y : puppy_weight.weight}
+
+  const [graghData, setGraghData] = useState([
+    {
+      id: '모아',
+      color: 'hsl(281, 70%, 50%)',
+      data: [
+        {
+          x: '2024-09-12',
+          y: 190,
+        },
+        {
+          x: '2024-09-13',
+          y: 74,
+        },
+        {
+          x: '2024-09-14',
+          y: 263,
+        },
+        {
+          x: '2024-09-15',
+          y: 22,
+        },
+        {
+          x: '2024-09-16',
+          y: 236,
+        },
+      ],
+    },
+  ]);
 
   useEffect(() => {}, []);
 
@@ -43,9 +76,9 @@ function MyPage() {
               <p>20.10.20</p>
             </ProfileTextWrapper>
           </ProfileContent>
-          <ProfileMenuWrapper>
-            <button>탈퇴하기</button>
-          </ProfileMenuWrapper>
+          <ProfileGraphWrapper>
+            <MyPageGraghComp data={graghData} />
+          </ProfileGraphWrapper>
         </ProfileContainer>
         <ContentsContainer>
           <TebmenuWrapper>
@@ -63,6 +96,7 @@ function MyPage() {
           </TebmenuWrapper>
           <TebContentsWrapper>{activeTab === 0 ? <MyPagePostComp /> : <MyPageCalendarComp />}</TebContentsWrapper>
         </ContentsContainer>
+        <MemberDeleteButton>탈퇴하기</MemberDeleteButton>
       </Container>
     </>
   );
