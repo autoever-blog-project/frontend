@@ -1,9 +1,9 @@
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import { Home } from './pages/main/Home';
 import { ProtectedRoute } from './components/ProtectedRoute.jsx';
-import { Mission } from './pages/mission/Mission.jsx';
+import MissionPage from './pages/mission/MissionPage.jsx';
 import { Header } from './components/header/Header.jsx';
-import { PostDetail } from './pages/postdetail/PostDetail.jsx';
+import MainPage from './pages/main/MainPage.jsx';
+// import { PostDetail } from './pages/postdetail/PostDetail.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -17,20 +17,20 @@ function App() {
       children: [
         {
           path: '/',
-          element: <Home />,
+          element: <MainPage />,
         },
         {
           path: '/mission',
           element: (
             <ProtectedRoute>
-              <Mission />
+              <MissionPage />
             </ProtectedRoute>
           ),
         },
-        {
-          path: '/detail',
-          element: <PostDetail />,
-        },
+        // {
+        //   path: '/detail',
+        //   element: <PostDetail />,
+        // },
       ],
     },
   ]);
