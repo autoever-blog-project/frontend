@@ -25,6 +25,7 @@ export const MissionContents = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 `;
 
 export const ImageContainer = styled.div`
@@ -33,8 +34,8 @@ export const ImageContainer = styled.div`
   justify-content: center;
   align-items: center;
   img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
   }
 `;
 
@@ -47,7 +48,7 @@ export const TextContainer = styled.div`
 `;
 
 export const SubTitleText = styled.div`
-  font-size: 24px;
+  font-size: 30px;
   line-height: 1.5;
   margin-bottom: 10px;
   color: black;
@@ -56,4 +57,12 @@ export const SubTitleText = styled.div`
 export const HistoryContainer = styled.div`
   width: 100%;
   height: 100%;
+`;
+
+export const CalenderContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
 `;

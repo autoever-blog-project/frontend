@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import plusIcon from '@/assets/PlusIcon.svg';
 import * as S from './WritePageStyle.js';
 
-const WritePageImage = forwardRef((props, ref) => {
+const WritePageImage = forwardRef((defaultImage, ref) => {
   const imgRef = useRef(null);
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(defaultImage.defaultImage);
   const imgUploadHandler = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -24,7 +24,11 @@ const WritePageImage = forwardRef((props, ref) => {
 
   return (
     <S.WritePageImgContainer>
-      {preview ? <img src={preview} alt="image preview" style={{ width: '250px', height: '250px' }} /> : <></>}
+      {preview ? (
+        <img src={preview} alt="image preview" style={{ width: '250px', height: '250px', position: 'absolute' }} />
+      ) : (
+        <></>
+      )}
       <S.WritePageImgSubmitContainer $isPreview={preview}>
         <S.WritePageImageInput
           id="inputImg"

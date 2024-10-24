@@ -6,7 +6,7 @@ export const WritePageViewContainer = styled.div`
   gap: 10px;
   box-sizing: border-box;
   //height 수정해야함
-  max-height: 1000px;
+  max-height: 1200px;
   padding-top: 190px;
   display: flex;
   justify-content: center;
@@ -110,13 +110,12 @@ export const WritePageImgContainer = styled.div`
 `;
 
 export const WritePageSubmitButton = styled.button`
-  border: 1px solid ${(props) => (props.$clicked ? 'red' : 'black')};
-  color: ${(props) => (props.$clicked ? 'red' : 'black')};
-
+  border: 1px solid black;
   border-radius: 13px;
   padding-left: 10px;
   padding-right: 10px;
-  height: 30px;
+  height: 35px;
+  width: 80px;
   outline: none;
   position: relative;
   overflow: hidden;
@@ -153,9 +152,10 @@ export const WritePageRadioInputContainer = styled.div`
 //WritePageImgContainer 구성요소
 
 export const WritePageImgSubmitContainer = styled.div`
-  width: 200px;
-  height: ${(props) => (props.$isPreview ? '0px' : '200px')};
-  visibility: ${(props) => (props.$isPreview ? 'hidden' : 'visible')}; /* hover 상태에 따라 보이기 */
+  width: ${(props) => (props.$isPreview ? '250px' : '200px')};
+  height: ${(props) => (props.$isPreview ? '250px' : '200px')};
+  opacity: ${(props) => (props.$isPreview ? 0 : 1)};
+
   border: 1px solid black;
   border-radius: 10px;
   display: flex;

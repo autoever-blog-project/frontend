@@ -11,7 +11,7 @@ function MissionModalComp({ onClose, missionDate, missionUrl }) {
         <Contents>
           <h1>{missionDate}일의 추억이에요.</h1>
           <img src={missionUrl} />
-          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={handleClose}>닫기</Button>
         </Contents>
       </ModalWrap>
     </Overlay>
@@ -34,7 +34,7 @@ const ModalWrap = styled.div`
   width: 600px;
   display: flex;
   justify-content: center;
-  height: fit-content;
+  height: 500px;
   border-radius: 15px;
   background-color: #fff;
   position: absolute;
@@ -57,26 +57,32 @@ const CloseButton = styled.div`
 
 const Contents = styled.div`
   margin: 50px 30px;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
   h1 {
     font-size: 30px;
     font-weight: 600;
-    margin-bottom: 60px;
+    text-align: center;
   }
   img {
     width: 300px;
-    height: auto;
+    height: 320px;
   }
 `;
 const Button = styled.button`
-  font-size: 14px;
+  font-size: 15px;
   padding: 10px 20px;
+  width: 300px;
   border: none;
   background-color: #ababab;
   border-radius: 10px;
   color: white;
-  font-style: italic;
-  font-weight: 200;
+  /* font-style: italic; */
+  font-weight: 500;
   cursor: pointer;
   &:hover {
     background-color: #898989;

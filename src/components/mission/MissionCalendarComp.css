@@ -9,7 +9,7 @@
 
 .fc-day-sat a {
   /* 토요일 컬러 */
-  color: pink;
+  color: red;
 }
 
 #calendar1 .fc .fc-toolbar.fc-header-toolbar {
@@ -48,13 +48,14 @@
 }
 
 #calendar1 .fc .fc-daygrid-day-events {
-  width: 100px;
+  width: 100%;
   height: 100px;
 }
 
 #calendar1 .fc .fc-daygrid-block-event {
-  width: 100px;
-  height: 90px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
 
 #calendar1 .fc .fc-scroller {

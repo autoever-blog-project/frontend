@@ -26,7 +26,7 @@ function App() {
           element: <MissionPage />,
         },
         { path: '/post', element: <PostPage /> },
-        { path: '/write', element: <WritePage /> },
+        { path: '/write', element: <WritePage defaultPage={null} /> },
         // {
         //   path: '/detail',
         //   element: <PostDetail />,
