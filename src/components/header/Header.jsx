@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import * as S from './Header.style';
 import Logo from '@/assets/logo.png';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { authenticated } from '@/api/axiosInstance';
 
 export const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -33,19 +34,28 @@ export const Header = () => {
 
   // URL에서 토큰 추출 및 상태 업데이트
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const accessToken = params.get('accessToken');
-    const refreshToken = params.get('refreshToken');
+    const fetchGetUserInfo = async () => {
+      const params = new URLSearchParams(location.search);
+      const accessToken = params.get('accessToken');
+      const refreshToken = params.get('refreshToken');
 
-    if (accessToken && refreshToken) {
-      localStorage.setItem('actk', accessToken);
-      localStorage.setItem('rftk', refreshToken);
-      setIsLogin(true); // 로그인 상태 업데이트
-      navigate('/'); // 로그인 후 홈으로 이동
-    }
+      if (accessToken && refreshToken) {
+        localStorage.setItem('actk', accessToken);
+        localStorage.setItem('rftk', refreshToken);
+        setIsLogin(true); // 로그인 상태 업데이트
+
+        const response = await authenticated.post('/login/oauth/kakao', {
+          accessToken: accessToken,
+          refreshToken: refreshToken,
+        });
+        localStorage.setItem('memeber_id', response.data.member_id);
+        navigate('/'); // 로그인 후 홈으로 이동
+      }
+    };
+
+    fetchGetUserInfo();
   }, [location.search, navigate]);
 
-  // 컴포넌트 마운트 시 로컬 스토리지 확인
   useEffect(() => {
     const accessToken = localStorage.getItem('actk');
     const refreshToken = localStorage.getItem('rftk');
