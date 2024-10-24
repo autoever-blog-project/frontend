@@ -1,11 +1,10 @@
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-
 import { ProtectedRoute } from './components/ProtectedRoute.jsx';
 import MissionPage from './pages/mission/MissionPage.jsx';
 import { Header } from './components/header/Header.jsx';
 import MainPage from './pages/main/MainPage.jsx';
+import { PostDetail } from './pages/postdetail/PostDetail.jsx';
 import MyPage from './pages/mypage/MyPage.jsx';
-// import { PostDetail } from './pages/postdetail/PostDetail.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -29,11 +28,10 @@ function App() {
             </ProtectedRoute>
           ),
         },
-        // {
-        //   path: '/detail',
-        //   element: <PostDetail />,
-        // },
-
+        {
+          path: '/detail',
+          element: <PostDetail />,
+        },
         {
           path: '/mypage',
           element: <MyPage />,
