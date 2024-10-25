@@ -13,7 +13,8 @@ export const TagButtonContainer = styled.button`
   cursor: pointer;
   &:hover {
     color: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    border: 1px solid #888;
   }
   &:hover .overlay {
     opacity: 0.5;

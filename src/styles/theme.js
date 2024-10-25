@@ -6,6 +6,7 @@ const colors = {
   darkGray: '#999999',
   mediumGray: '#868E96',
   deleteRed: '#ff5a4a',
+  lightGreen: '#90EE90',
 };
 
 export const theme = {

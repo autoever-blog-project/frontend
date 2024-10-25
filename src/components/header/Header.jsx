@@ -49,7 +49,7 @@ export const Header = () => {
           refreshToken: refreshToken,
         });
         localStorage.setItem('member_id', response.data.member_id);
-        navigate('/'); // 로그인 후 홈으로 이동
+        navigate('/detail'); // 로그인 후 홈으로 이동
       }
     };
 
