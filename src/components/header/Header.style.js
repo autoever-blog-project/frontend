@@ -121,6 +121,8 @@ export const MenuLogout = styled.button`
     transform: translateY(-3px);
     color: white;
   }
+`;
+
 export const Point = styled.div`
   font-size: 14px;
   width: 40px;
