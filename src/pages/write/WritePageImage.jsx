@@ -4,8 +4,9 @@ import plusIcon from '@/assets/PlusIcon.svg';
 import * as S from './WritePageStyle.js';
 import { authenticated } from '../../api/axiosInstance.js';
 
-const WritePageImage = forwardRef((defaultImage, ref) => {
+const WritePageImage = forwardRef(({ defaultImage, subMitImgID }, ref) => {
   const imgRef = useRef(null);
+  const [imgId, setImgId] = useState(null);
   const [preview, setPreview] = useState(defaultImage.defaultImage);
   const imgUploadHandler = async (event) => {
     const file = event.target.files[0];
@@ -20,11 +21,14 @@ const WritePageImage = forwardRef((defaultImage, ref) => {
         formData.append('image', file);
       }
       console.log(formData);
-      await authenticated.post('/post/img', formData, {
+      const chk = await authenticated.post('/post/img', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+
+      setImgId(chk.data);
+      subMitImgID(chk.data);
     }
   };
   useImperativeHandle(ref, () => ({
