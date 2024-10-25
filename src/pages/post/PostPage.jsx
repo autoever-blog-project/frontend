@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 
 function PostPage() {
   //태그 리스트
-  const tags = ['전체', '강아지', '여행qweqeqweqweq'];
+  const tags = ['강아지', '여행', '댕스타그램', '산책'];
   const inputData = useLocation().state?.searchData || '';
   //inputData로 검색 날리기
   //더미 데이터

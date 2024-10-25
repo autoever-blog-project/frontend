@@ -5,6 +5,7 @@ export const PostCardContainer = styled.div`
   height: 350px;
   background-color: white;
   border-radius: 10px;
+  box-sizing: border-box;
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -13,10 +14,14 @@ export const PostCardContainer = styled.div`
   }
   &:active .overlay {
     opacity: 0.8;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  &:hover {
+    transform: scale(0.99);
+    opacity: 0.9;
   }
   &:active {
-    transform: scale(0.98);
+    opacity: 0.5;
   }
 `;
 

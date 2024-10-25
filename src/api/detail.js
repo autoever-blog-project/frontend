@@ -29,3 +29,8 @@ export const fetchPostDelete = async () => {
 export const fetchTodoList = async () => {
   return await authenticated.get('mission/calendar/list');
 };
+
+//게시글 전부 받아오기
+export const fetchPostGetAll = async () => {
+  return await authenticated.get('post/list');
+};

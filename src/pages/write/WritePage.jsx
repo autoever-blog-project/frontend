@@ -7,14 +7,18 @@ import * as S from './WritePageStyle.js';
 import WritePageTag from './WritePageTag.jsx';
 import WritePageTitleInput from './WritePageTitleInput.jsx';
 import chk from '@/assets/0.png';
+import { useLocation } from 'react-router-dom';
 
 function WritePage({ defaultPage }) {
+  const defaultPage1 = useLocation().state?.defaultPage || null;
   const imgRef = useRef();
   const contentRef = useRef();
   const [postFlag, setPostFlag] = useState(0);
   const [defaultPageInfo, setDefaultPageInfo] = useState(defaultPage);
   useEffect(() => {
     // contentRef.current.setContent('qwe');
+    //defaultPage1이 null이 아니면 selected
+    handleSubmitTag(defaultPage1['tag']);
   }, []);
   const submitData = { tag: [] };
   //이모지 따라 나올 글귀 리스트
@@ -84,7 +88,7 @@ function WritePage({ defaultPage }) {
   const formRef = useRef(null);
   return (
     <div>
-      {defaultPage === null ? (
+      {defaultPage1 === null ? (
         <S.WritePageViewContainer>
           <form ref={formRef} style={{ width: '100%', paddingLeft: 5 }}>
             <WritePageTitleInput defaultvalue={''} />
@@ -105,12 +109,12 @@ function WritePage({ defaultPage }) {
       ) : (
         <S.WritePageViewContainer>
           <form ref={formRef} style={{ width: '100%', paddingLeft: 5 }}>
-            <WritePageTitleInput defaultvalue={defaultPageInfo['title']} />
-            <WritePageRadio defaultEmoji={defaultPageInfo['emoji']} />
+            <WritePageTitleInput defaultvalue={defaultPage1['title']} />
+            <WritePageRadio defaultEmoji={defaultPage1['emoji']} />
           </form>
-          <WritePageTag onSubmitTags={handleSubmitTag} defaultTags={defaultPageInfo['tags']} />
-          <WritePageEditor defaultValue={defaultPageInfo['content']} ref={contentRef} />
-          <WritePageImage ref={imgRef} defaultImage={defaultPageInfo['img']} />
+          <WritePageTag onSubmitTags={handleSubmitTag} defaultTags={defaultPage1['tags']} />
+          <WritePageEditor defaultValue={defaultPage1['content']} ref={contentRef} />
+          <WritePageImage ref={imgRef} defaultImage={defaultPage1['img']} />
           <S.WritePageSubmitButton
             type="button"
             onClick={() => {

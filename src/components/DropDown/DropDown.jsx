@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import FormControl from '@mui/material/FormControl';
 import InputBase from '@mui/material/InputBase';
 import { Select, MenuItem } from '@mui/material';
+import { theme } from '../../styles/theme';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -49,11 +50,23 @@ export default function CustomizedSelects({ submitSort }) {
       <FormControl variant="standard">
         <Select value={sort} input={<BootstrapInput />} onChange={handleChange} style={{ width: '120px' }}>
           {/* 홍빈이형이랑 연결 시 색 변경 */}
-          <MenuItem value={'최신 순'} style={{ backgroundColor: sort === '최신 순' ? 'gray' : 'white' }}>
+          <MenuItem
+            value={'최신 순'}
+            style={{ backgroundColor: sort === '최신 순' ? `${theme.colors.darkGray}` : 'white' }}
+          >
             최신 순
           </MenuItem>
-          <MenuItem style={{ backgroundColor: sort === '좋아요 순' ? 'gray' : 'white' }} value={'좋아요 순'}>
+          <MenuItem
+            style={{ backgroundColor: sort === '좋아요 순' ? `${theme.colors.darkGray}` : 'white' }}
+            value={'좋아요 순'}
+          >
             좋아요 순
+          </MenuItem>
+          <MenuItem
+            style={{ backgroundColor: sort === '오래된 순' ? `${theme.colors.darkGray}` : 'white' }}
+            value={'오래된 순'}
+          >
+            오래된 순
           </MenuItem>
         </Select>
       </FormControl>

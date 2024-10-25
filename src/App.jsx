@@ -6,6 +6,8 @@ import MainPage from './pages/main/MainPage.jsx';
 import PostPage from './pages/post/PostPage.jsx';
 import WritePage from './pages/write/WritePage.jsx';
 // import { PostDetail } from './pages/postdetail/PostDetail.jsx';
+import { PostDetail } from './pages/postdetail/PostDetail.jsx';
+import MyPage from './pages/mypage/MyPage.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -36,6 +38,14 @@ function App() {
         //   path: '/mypage',
         //   element: <MyPage />,
         // },
+        {
+          path: '/detail',
+          element: <PostDetail />,
+        },
+        {
+          path: '/mypage',
+          element: <MyPage />,
+        },
       ],
     },
   ]);
