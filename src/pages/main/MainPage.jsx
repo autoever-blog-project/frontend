@@ -5,27 +5,26 @@ import 'swiper/swiper-bundle.css';
 import PostCard from '@/components/PostCard/PostCard';
 import SearchBar from '@/components/SearchBar/SearchBar.jsx';
 import { useEffect, useState } from 'react';
-import { fetchPostGetAll } from '../../api/detail.js';
+import { fetchPostGetByParam } from '../../api/detail.js';
 
 function MainPage() {
-  const [postInfo, setPostInfo] = useState(null);
+  const [postInfo, setPostInfo] = useState([]);
+  const [recentInfo, setRecentInfo] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const postList = await fetchPostGetAll();
-        setPostInfo(postList);
-        console.log(postList);
+        //좋아요순
+        const postList = await fetchPostGetByParam('likes', 1);
+        setPostInfo(postList.data.dtoList);
+        //최신순
+        const recentList = await fetchPostGetByParam('latest', 1);
+        setRecentInfo(recentList.data.dtoList);
       } catch (e) {
         console.log(e);
       }
     };
     fetchData();
   }, []);
-  const member = {
-    nickname: '송지웅',
-  };
-  //게시글 정보 리스트
-  const postInfos = new Array(6).fill(postInfo);
   return (
     <div>
       {postInfo === null ? (
@@ -47,9 +46,9 @@ function MainPage() {
                   type: 'fraction',
                 }}
               >
-                {postInfos.map((item, index) => (
+                {postInfo.map((item, index) => (
                   <SwiperSlide key={index} style={{ width: '300px' }}>
-                    <PostCard postInfo={item} member={member}></PostCard>
+                    <PostCard postInfo={item}></PostCard>
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -67,9 +66,9 @@ function MainPage() {
                   type: 'fraction',
                 }}
               >
-                {postInfos.map((item, index) => (
+                {recentInfo.map((item, index) => (
                   <SwiperSlide key={index} style={{ width: '300px' }}>
-                    <PostCard postInfo={item} member={member}></PostCard>
+                    <PostCard postInfo={item}></PostCard>
                   </SwiperSlide>
                 ))}
               </Swiper>
