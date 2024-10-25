@@ -13,7 +13,7 @@ export const authenticated = axios.create({
 
 // 요청 보내기 전 access token 헤더에 추가
 authenticated.interceptors.request.use((config) => {
-  config.headers.accessToken = localStorage.getItem(ACCESS_TOKEN);
+  config.headers['Authorization'] = localStorage.getItem(ACCESS_TOKEN);
   return config;
 });
 
@@ -23,13 +23,13 @@ const refreshAccessToken = async (originRequest) => {
 
   if (!refreshToken) throw new Error('유효하지 않은 토큰값 입니다');
 
-  originRequest.headers.refreshToken = `Bearer ${refreshToken}`;
+  originRequest.headers['Authorization-refresh'] = `Bearer ${refreshToken}`;
   try {
     const response = await axios(originRequest);
     const newAccessToken = response.headers.accessToken;
 
     localStorage.setItem(ACCESS_TOKEN, newAccessToken);
-    originRequest.headers.accessToken = newAccessToken;
+    originRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
 
     return axios(originRequest);
   } catch {

@@ -102,3 +102,16 @@ export const MenuLogin = styled.button`
     color: white;
   }
 `;
+
+export const Point = styled.div`
+  font-size: 14px;
+  width: 40px;
+  text-align: center;
+`;
+
+export const PointWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+`;
