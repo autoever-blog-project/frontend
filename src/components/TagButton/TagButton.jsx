@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import * as S from './TagButtonStyle.js';
 
 function TagButton({ tag, submitTag, already }) {
-  const [clicked, setClicked] = useState(already);
+  const [clicked, setClicked] = useState(false);
+
   return (
     <div
       style={{ width: 'fit-content' }}

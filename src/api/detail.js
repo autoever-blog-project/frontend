@@ -36,3 +36,12 @@ export const fetchTodoList = async () => {
 export const fetchTodoWrite = async (data) => {
   return await authenticated.post('todo/', data);
 };
+
+//게시글 전부 받아오기
+export const fetchPostGetAll = async () => {
+  return await authenticated.get('post/list');
+};
+
+export const fetchPostWrite = async (data) => {
+  return await authenticated.post('post/', data);
+};

@@ -6,11 +6,14 @@ import {
   TextContainer,
   SubTitleText,
   HistoryContainer,
+  CalenderContainer,
 } from './MissionPage.style';
 import MissionCalendarComp from '@/components/mission/MissionCalendarComp';
 import bathImage from '@/assets/bath.svg';
 import axios from 'axios';
 import missionComplete from '@/assets/missioncomplete.png';
+import * as WP from '@/pages/write/WritePageStyle.js';
+import plusIcon from '@/assets/PlusIcon.svg';
 //강아지와 주인 개인미션에 넣을사진
 
 //예정일이 없을때 랜덤 미션 리스트
@@ -124,7 +127,8 @@ function MissionPage() {
 
   return (
     <>
-      <MissionContainer onClick={handleContainerClick}>
+      <MissionContainer>
+        {/* <MissionOverlay /> */}
         <MissionContents>
           {isComplete ? (
             <>
@@ -151,25 +155,49 @@ function MissionPage() {
           ) : (
             todayMission && (
               <>
-                <ImageContainer>
+                <WP.WritePageImgSubmitContainer>
+                  <WP.WritePageImageInput
+                    id="inputImg"
+                    type="file"
+                    accept="image/png, image/jpeg, image/jpg"
+                    onChange={handleFileUpload}
+                    // onChange={imgUploadHandler}
+                    // ref={imgRef}
+                  />
+                  <WP.WritePageImageInputOverlay />
+                  {/* <img src={plusIcon} style={{ width: 40 }} alt="plus icon" /> */}
+                  <img src={todayMission.imageUrl} alt={todayMission.mission} style={{ width: '95%', height: '95%' }} />
+                </WP.WritePageImgSubmitContainer>
+                {/* 
+                <ImageContainer onClick={handleContainerClick}>
+                  <img src={todayMission.imageUrl} alt={todayMission.mission} />
+                </ImageContainer> */}
+                <TextContainer>
+                  <p>오늘의 미션</p>
+                  <p>{todayMission.mission} 인증하기!</p>
+                </TextContainer>
+                {/* <ImageContainer>
                   <img src={todayMission.imageUrl} alt={todayMission.mission} />
                 </ImageContainer>
                 <TextContainer>
                   <p>오늘의 미션</p>
                   <p>{todayMission.mission} 인증하기!</p>
-                </TextContainer>
+                </TextContainer> */}
               </>
             )
           )}
         </MissionContents>
       </MissionContainer>
+
       <HistoryContainer>
         <SubTitleText>
           <p>미션 히스토리</p>
         </SubTitleText>
-        <MissionCalendarComp refresh={isUploaded} />
+        <CalenderContainer>
+          <MissionCalendarComp refresh={isUploaded} />
+        </CalenderContainer>
       </HistoryContainer>
-      <input type="file" ref={fileInputRef} style={{ display: 'none' }} accept="image/*" onChange={handleFileUpload} />
+      {/* <input type="file" ref={fileInputRef} style={{ display: 'none' }} accept="image/*" onChange={handleFileUpload} /> */}
     </>
   );
 }

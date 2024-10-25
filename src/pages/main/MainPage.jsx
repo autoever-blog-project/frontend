@@ -4,24 +4,28 @@ import 'swiper/css';
 import 'swiper/swiper-bundle.css';
 import PostCard from '@/components/PostCard/PostCard';
 import SearchBar from '@/components/SearchBar/SearchBar.jsx';
+import { useEffect, useState } from 'react';
+import { fetchPostGetAll } from '../../api/detail.js';
 
 function MainPage() {
-  //dummyData
-  const postInfo = {
-    title: 'qwiTw',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quisquam tempora magni dolorum doloremque placeat, incidunt culpa et natus excepturi rem dolorem modi distinctio amet nihil odit? Consequatur, itaque repellendus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quisquam tempora magni dolorum doloremque placeat, incidunt culpa et natus excepturi rem dolorem modi distinctio amet nihil odit? Consequatur, itaque repellendus?',
-    post_date: new Date(),
-    img: '@/assets/0.png',
-    tag: '강아지 마트',
-    emoji: '@/assets/hashtag.png',
-    like_heart: 1000,
-  };
+  const [postInfo, setPostInfo] = useState({});
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const postList = await fetchPostGetAll();
+        setPostInfo(postList);
+        console.log(postList);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, []);
   const member = {
     nickname: '송지웅',
   };
   //게시글 정보 리스트
-  const postInfos = new Array(5).fill(postInfo);
+  const postInfos = new Array(6).fill(postInfo);
   return (
     <div>
       <S.MainViewBodyContainer>
@@ -30,10 +34,12 @@ function MainPage() {
           <S.SwiperSliderContainerTitle>좋아요 많이 받은 게시글</S.SwiperSliderContainerTitle>
           <S.SwiperSliderPostContainer>
             <Swiper
-              spaceBetween={30}
+              spaceBetween={0}
               slidesPerView={3}
               loop={true}
               navigation={true}
+              centeredSlides={true}
+              // loopAdditionalSlides={3}
               pagination={{
                 type: 'fraction',
               }}
@@ -50,7 +56,7 @@ function MainPage() {
           <S.SwiperSliderContainerTitle>최신 게시글</S.SwiperSliderContainerTitle>
           <S.SwiperSliderPostContainer>
             <Swiper
-              spaceBetween={30}
+              spaceBetween={0}
               slidesPerView={3}
               loop={true}
               navigation={true}

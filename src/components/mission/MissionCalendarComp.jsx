@@ -73,8 +73,9 @@ function MissionCalendarComp({ refresh }) {
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek',
+          right: '',
         }}
+        customButtons={{ today: { text: '오늘' } }}
         showNonCurrentDates={false}
         height="auto"
       />

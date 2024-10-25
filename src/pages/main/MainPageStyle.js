@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MainViewBodyContainer = styled.div`
-  padding-top: 20px;
+  padding-top: 100px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -18,7 +18,7 @@ export const SwiperSliderContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 15px;
+  gap: 25px;
 `;
 
 //SwiperSliderContainer 구성요소 (제목)
@@ -31,5 +31,20 @@ export const SwiperSliderContainerTitle = styled.p`
 `;
 
 export const SwiperSliderPostContainer = styled.div`
-  width: 95%;
+  width: 100%;
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .swiper-button-prev {
+    color: black;
+    left: 0px;
+    cursor: pointer;
+  }
+  .swiper-button-next {
+    color: black;
+    right: -2px;
+    cursor: pointer;
+  }
 `;
