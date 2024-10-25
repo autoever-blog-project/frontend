@@ -62,6 +62,7 @@ function MainPage() {
                 slidesPerView={3}
                 loop={true}
                 navigation={true}
+                centeredSlides={true}
                 pagination={{
                   type: 'fraction',
                 }}

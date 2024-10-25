@@ -15,7 +15,7 @@ function PostCardFooter({ postInfo }) {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 20, width: 20 }}>
           <div style={{ width: 15, height: 15, overflow: 'hidden' }}>
-            <S.PostCardTotalHeart src={postInfo.like_heart !== 0 ? heartFill : heartBlank} />
+            <S.PostCardTotalHeart src={postInfo.totalLikeHeart !== 0 ? heartFill : heartBlank} />
           </div>
           <div>{postInfo.like_heart === 0 ? ' ' : postInfo.like_heart}</div>
         </div>

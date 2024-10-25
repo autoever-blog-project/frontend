@@ -37,11 +37,17 @@ export const fetchTodoWrite = async (data) => {
   return await authenticated.post('todo/', data);
 };
 
-//게시글 받아오기
+//게시글 받아오기(정렬된)
 export const fetchPostGetByParam = async (sort, page) => {
   return await authenticated.get(`post/list/${sort}?page=${page}&size=6`);
 };
 
+//글쓰기
 export const fetchPostWrite = async (data) => {
   return await authenticated.post('post/', data);
+};
+
+//게시글 검색 결과로 받아오기
+export const fetchPostWithSearch = async (data, page) => {
+  return await authenticated.get(`post/list/search?keyword=${data}&page=${page}&size=6`);
 };
