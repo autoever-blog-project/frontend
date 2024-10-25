@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { fetchPostGetAll } from '../../api/detail.js';
 
 function MainPage() {
-  const [postInfo, setPostInfo] = useState({});
+  const [postInfo, setPostInfo] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,51 +28,55 @@ function MainPage() {
   const postInfos = new Array(6).fill(postInfo);
   return (
     <div>
-      <S.MainViewBodyContainer>
-        <SearchBar />
-        <S.SwiperSliderContainer>
-          <S.SwiperSliderContainerTitle>좋아요 많이 받은 게시글</S.SwiperSliderContainerTitle>
-          <S.SwiperSliderPostContainer>
-            <Swiper
-              spaceBetween={0}
-              slidesPerView={3}
-              loop={true}
-              navigation={true}
-              centeredSlides={true}
-              // loopAdditionalSlides={3}
-              pagination={{
-                type: 'fraction',
-              }}
-            >
-              {postInfos.map((item, index) => (
-                <SwiperSlide key={index} style={{ width: '300px' }}>
-                  <PostCard postInfo={item} member={member}></PostCard>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </S.SwiperSliderPostContainer>
-        </S.SwiperSliderContainer>
-        <S.SwiperSliderContainer>
-          <S.SwiperSliderContainerTitle>최신 게시글</S.SwiperSliderContainerTitle>
-          <S.SwiperSliderPostContainer>
-            <Swiper
-              spaceBetween={0}
-              slidesPerView={3}
-              loop={true}
-              navigation={true}
-              pagination={{
-                type: 'fraction',
-              }}
-            >
-              {postInfos.map((item, index) => (
-                <SwiperSlide key={index} style={{ width: '300px' }}>
-                  <PostCard postInfo={item} member={member}></PostCard>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </S.SwiperSliderPostContainer>
-        </S.SwiperSliderContainer>
-      </S.MainViewBodyContainer>
+      {postInfo === null ? (
+        <></>
+      ) : (
+        <S.MainViewBodyContainer>
+          <SearchBar />
+          <S.SwiperSliderContainer>
+            <S.SwiperSliderContainerTitle>좋아요 많이 받은 게시글</S.SwiperSliderContainerTitle>
+            <S.SwiperSliderPostContainer>
+              <Swiper
+                spaceBetween={0}
+                slidesPerView={3}
+                loop={true}
+                navigation={true}
+                centeredSlides={true}
+                // loopAdditionalSlides={3}
+                pagination={{
+                  type: 'fraction',
+                }}
+              >
+                {postInfos.map((item, index) => (
+                  <SwiperSlide key={index} style={{ width: '300px' }}>
+                    <PostCard postInfo={item} member={member}></PostCard>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </S.SwiperSliderPostContainer>
+          </S.SwiperSliderContainer>
+          <S.SwiperSliderContainer>
+            <S.SwiperSliderContainerTitle>최신 게시글</S.SwiperSliderContainerTitle>
+            <S.SwiperSliderPostContainer>
+              <Swiper
+                spaceBetween={0}
+                slidesPerView={3}
+                loop={true}
+                navigation={true}
+                pagination={{
+                  type: 'fraction',
+                }}
+              >
+                {postInfos.map((item, index) => (
+                  <SwiperSlide key={index} style={{ width: '300px' }}>
+                    <PostCard postInfo={item} member={member}></PostCard>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </S.SwiperSliderPostContainer>
+          </S.SwiperSliderContainer>
+        </S.MainViewBodyContainer>
+      )}
     </div>
   );
 }

@@ -16,13 +16,14 @@ function WritePage({ defaultPage }) {
   const contentRef = useRef();
   const [postFlag, setPostFlag] = useState(0);
   const [defaultPageInfo, setDefaultPageInfo] = useState(defaultPage);
+  const [imgId, setimgId] = useState(null);
   useEffect(() => {
     // contentRef.current.setContent('qwe');
     //defaultPage1이 null이 아니면 selected
-    defaultPage1 === null ? setDefaultPageInfo({ tag: [] }) : console.log(defaultPage1['tag']);
+    defaultPage1 === null ? setDefaultPageInfo({ tags: [] }) : console.log(defaultPage1['tags']);
     handleSubmitTag(defaultPageInfo);
   }, []);
-  const submitData = { tag: [] };
+  const submitData = { tags: [] };
   //이모지 따라 나올 글귀 리스트
   const emojies = ['q', 'w', 'e'];
   const parsingContent = (content, before, after) => {
@@ -33,10 +34,10 @@ function WritePage({ defaultPage }) {
     return content;
   };
   const handleSubmitTag = (selectedTag) => {
-    if (submitData['tag'].includes(selectedTag)) {
-      return (submitData['tag'] = submitData['tag'].filter((i) => i !== selectedTag));
+    if (submitData['tags'].includes(selectedTag)) {
+      return (submitData['tags'] = submitData['tags'].filter((i) => i !== selectedTag));
     } else {
-      return (submitData['tag'] = [...submitData['tag'], selectedTag]);
+      return (submitData['tags'] = [...submitData['tags'], selectedTag]);
     }
   };
   const handleSubmit = () => {
@@ -56,11 +57,11 @@ function WritePage({ defaultPage }) {
       return;
     }
 
-    if (submitData['tag'].length == 0) {
+    if (submitData['tags'].length == 0) {
       alert('카테고리를 정해주세요!');
       return;
     } else {
-      submitData['tag'] = submitData['tag'].map((item) => ({ name: item }));
+      submitData['tags'] = submitData['tags'].map((item) => ({ name: item }));
     }
     if (contentRef.current) {
       var contentBeforeParsing = contentRef.current.getContent();
@@ -71,8 +72,8 @@ function WritePage({ defaultPage }) {
     }
 
     if (imgRef.current) {
-      const inputImg = imgRef.current.getImage();
-      submitData['img'] = inputImg;
+      // const inputImg = imgRef.current.getImage();
+      // submitData['img'] = inputImg;
     } else {
       alert('이미지를 입력해주세요!');
       return;
@@ -80,6 +81,12 @@ function WritePage({ defaultPage }) {
     //여기에 이제 전송하면됨
     //post일떄
     if (postFlag === 0) {
+      submitData[''];
+      //string to num
+      submitData['memberId'] = parseInt(localStorage.getItem('member_id'));
+      (submitData['totalLikeHeart'] = 0), (submitData['my_like_heart'] = false);
+      submitData['imgId'] = imgId;
+      console.log(submitData);
       fetchPostWrite(submitData);
       alert(`input is ${submitData}`);
     }
@@ -98,7 +105,7 @@ function WritePage({ defaultPage }) {
           </form>
           <WritePageTag onSubmitTags={handleSubmitTag} defaultTags={[]} />
           <WritePageEditor defaultValue={''} ref={contentRef} />
-          <WritePageImage ref={imgRef} defaultImage={''} />
+          <WritePageImage ref={imgRef} defaultImage={''} subMitImgID={setimgId} />
           <S.WritePageSubmitButton
             type="button"
             onClick={() => {
@@ -116,7 +123,7 @@ function WritePage({ defaultPage }) {
           </form>
           <WritePageTag onSubmitTags={handleSubmitTag} defaultTags={defaultPage1['tags']} />
           <WritePageEditor defaultValue={defaultPage1['content']} ref={contentRef} />
-          <WritePageImage ref={imgRef} defaultImage={defaultPage1['img']} />
+          <WritePageImage ref={imgRef} defaultImage={defaultPage1['img']} subMitImgID={setimgId} />
           <S.WritePageSubmitButton
             type="button"
             onClick={() => {
