@@ -6,7 +6,7 @@ import DropDown from '@/components/DropDown/DropDown.jsx';
 import PostPagePagination from './PostPagePagination.jsx';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { fetchPostWithSearch } from '../../api/detail.js';
+import { fetchPostWithSearch, fetchPostWithTag } from '../../api/detail.js';
 
 function PostPage() {
   //태그 리스트
@@ -14,21 +14,17 @@ function PostPage() {
   const inputData = useLocation().state?.searchData || '';
   const [postInfos, setPostInfos] = useState([]);
   //inputData로 검색 날리기
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const postList = await fetchPostWithSearch(inputData, 1);
-        console.log(postList.data.dtoList);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const member = {
-    nickname: '송지웅',
+  const fetchData = async () => {
+    try {
+      const postList = await fetchPostWithSearch(inputData, 1);
+      setPostInfos(postList.data.dtoList);
+    } catch (e) {
+      console.log(e);
+    }
   };
+  useEffect(() => {
+    fetchData();
+  }, [inputData]);
 
   //pagination
   const itemsPerPage = 6;
@@ -42,7 +38,14 @@ function PostPage() {
   const [selectedTag, setSelectedTag] = useState('');
   const sortByTag = (tag) => {
     setSelectedTag(tag);
-
+    async () => {
+      try {
+        const postList = await fetchPostWithTag(tag, 1);
+        setPostInfos(postList.data.dtoList);
+      } catch (e) {
+        console.log(e);
+      }
+    };
     //postInfos sort하는 기능 (api랑 연동시 제작)
   };
   return (
@@ -62,7 +65,7 @@ function PostPage() {
         <S.PostPagePostGridContainer>
           {currentItems.map((item, idx) => (
             <S.PostPagePostGridPostCardContainer key={idx}>
-              <PostCard postInfo={item} member={member} />
+              <PostCard postInfo={item} />
             </S.PostPagePostGridPostCardContainer>
           ))}
         </S.PostPagePostGridContainer>

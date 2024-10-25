@@ -50,3 +50,7 @@ export const fetchPostWrite = async (data) => {
 export const fetchPostWithSearch = async (data, page) => {
   return await authenticated.get(`post/list/search?keyword=${data}&page=${page}&size=6`);
 };
+
+export const fetchPostWithTag = async (tag, page) => {
+  return await authenticated.get(`post/list/search/tag/${tag}?page=${page}&size=6`);
+};
