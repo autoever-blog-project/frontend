@@ -52,8 +52,9 @@ export const CardTitleWrapper = styled.div`
   gap: calc(5px);
   margin-bottom: 20px;
   img {
-    width: 50px;
-    height: 50px;
+    align-items: center;
+    width: 30px;
+    height: 30px;
   }
   p {
     font-size: 30px;

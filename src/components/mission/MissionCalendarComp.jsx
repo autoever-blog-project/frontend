@@ -7,15 +7,51 @@ import temp from '@/assets/bath.svg';
 import MissionModalComp from './MissionModalComp';
 import './MissionCalendarComp.css';
 import { fetchMissionList } from '../../api/detail';
+import dog1 from '@/assets/dog1.jpg';
+import dog2 from '@/assets/dog2.jpg';
+import dog3 from '@/assets/dog3.jpg';
+import dog4 from '@/assets/dog4.jpg';
+import dog5 from '@/assets/dog5.jpg';
+import dog6 from '@/assets/dog6.jpg';
 
 function MissionCalendarComp({ refresh }) {
   //TODO : axios get으로 eventsArray 채워주기 + 파일업로드 될때마다 여기로 props 내려줘서 새로고침해주기. /Line:21~
   const [eventsArray, setEventsArray] = useState([
     {
-      title: '목욕시키기',
+      title: '목욕시키고',
+      start: '2024-10-20',
+      allDay: true,
+      imageurl: dog1,
+    },
+    {
+      title: '산책하고',
       start: '2024-10-21',
       allDay: true,
-      imageurl: temp,
+      imageurl: dog2,
+    },
+    {
+      title: '여행가기',
+      start: '2024-10-22',
+      allDay: true,
+      imageurl: dog3,
+    },
+    {
+      title: '낮잠재우기',
+      start: '2024-10-23',
+      allDay: true,
+      imageurl: dog4,
+    },
+    {
+      title: '생일파티하고',
+      start: '2024-10-24',
+      allDay: true,
+      imageurl: dog5,
+    },
+    {
+      title: '발 닦아주고',
+      start: '2024-10-25',
+      allDay: true,
+      imageurl: dog6,
     },
   ]);
   const [selectedImageUrl, setSelectedImageUrl] = useState(null); //모달에 props로 내려줌
@@ -51,8 +87,7 @@ function MissionCalendarComp({ refresh }) {
 
   const handleEventClick = (info) => {
     info.jsEvent.preventDefault();
-    setSelectedImageUrl(info.event.url);
-    console.log(info.event.extendedProps.imageurl);
+    -console.log(info.event.extendedProps.imageurl);
     const eventDate = new Date(info.event.start);
     const formatted = eventDate.getDate(); // 상태 업데이트 전에 직접 값 사용
     console.log(formatted);
@@ -71,6 +106,7 @@ function MissionCalendarComp({ refresh }) {
     if (info.event.extendedProps.imageurl) {
       const img = document.createElement('img');
       img.src = info.event.extendedProps.imageurl;
+      setSelectedImageUrl(img.src);
       img.style.width = '130px'; // 원하는 크기로 조정
       img.style.height = '80px'; // 비율 유지
       img.style.borderRadius = '5px'; // 모서리 둥글게 설정 (선택 사항)
@@ -103,7 +139,7 @@ function MissionCalendarComp({ refresh }) {
         height="auto"
         locale="ko"
       />
-      {isModal && <MissionModalComp onClose={closeModal} missionUrl={temp} missionDate={selectEventDay} />}
+      {isModal && <MissionModalComp onClose={closeModal} missionUrl={dog6} missionDate={selectEventDay} />}
     </div>
   );
 }
