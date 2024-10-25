@@ -8,8 +8,10 @@ import { useEffect, useState } from 'react';
 import { fetchPostGetByParam } from '../../api/detail.js';
 
 function MainPage() {
+
   const [postInfo, setPostInfo] = useState([]);
   const [recentInfo, setRecentInfo] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {

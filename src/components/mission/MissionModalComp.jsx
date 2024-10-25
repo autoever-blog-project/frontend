@@ -36,7 +36,7 @@ const ModalWrap = styled.div`
   justify-content: center;
   height: 500px;
   border-radius: 15px;
-  background-color: #fff;
+  background-color: #cfffe5;
   position: absolute;
   top: 50%;
   left: 50%;
