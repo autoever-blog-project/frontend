@@ -125,7 +125,7 @@ export const MenuLogout = styled.button`
 
 export const Point = styled.div`
   font-size: 14px;
-  width: 40px;
+  width: 80px;
   text-align: center;
 `;
 

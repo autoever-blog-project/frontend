@@ -39,6 +39,30 @@ function MissionPage() {
   const fileInputRef = useRef(null);
 
   useEffect(() => {
+    localStorage.getItem('complete_day') === new Date().toDateString() ? setIsComplete(true) : null;
+  }, []);
+
+  useEffect(() => {
+    setCurrentDay(new Date().toDateString());
+  });
+
+  //매일 미션이 갱신되야하므로 날짜, 미션을 로컬스토리지에 저장해두고 day가 다르다면 새로 미션 받는다.
+  const loadOrSetMission = () => {
+    const savedData = JSON.parse(localStorage.getItem('missionData'));
+    const savedDay = savedData?.date;
+
+    if (savedDay === currentDay) {
+      setTodayMission(savedData.mission);
+      return;
+    }
+    console.log(savedDay);
+    console.log(currentDay);
+
+    setIsComplete(false);
+
+    let selected = '';
+
+    // TODO 미션인날
     if (localStorage.getItem('isDueDay') !== null && localStorage.getItem('missionData') === null) {
       const today = new Date().toISOString().slice(0, 10);
 
@@ -60,33 +84,8 @@ function MissionPage() {
         } catch (error) {
           console.error('Error fetching todo list:', error);
         }
+        fetchData();
       };
-
-      fetchData();
-    }
-  }, []);
-
-  useEffect(() => {
-    setCurrentDay(new Date().toDateString());
-  });
-
-  //매일 미션이 갱신되야하므로 날짜, 미션을 로컬스토리지에 저장해두고 day가 다르다면 새로 미션 받는다.
-  const loadOrSetMission = () => {
-    const savedData = JSON.parse(localStorage.getItem('missionData'));
-    const savedDay = savedData?.date;
-
-    if (savedDay === currentDay) {
-      setTodayMission(savedData.mission);
-      return;
-    }
-
-    setIsComplete(false);
-
-    let selected = '';
-
-    // TODO 미션인날
-    if (isDueDay) {
-      //axios로 받아온 todoList[0].contents
     } else {
       const randomIndex = Math.floor(Math.random() * missions.length);
       selected = missions[randomIndex];
@@ -104,6 +103,14 @@ function MissionPage() {
     setRefresh(!refresh);
   };
 
+  const handleComplete = () => {
+    setIsComplete(true);
+    const temp = localStorage.getItem('point') ? localStorage.getItem('point') : '0';
+    const pnt = parseInt(temp) + 10;
+    localStorage.setItem('point', pnt);
+    localStorage.setItem('complete_day', new Date().toDateString());
+  };
+
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -118,7 +125,7 @@ function MissionPage() {
         // await fetchMissionWrite(formData);
 
         setIsUploaded(!isUploaded);
-        setIsComplete(true);
+        handleComplete();
       } catch (error) {
         console.error('이미지 업로드 중 오류 발생:', error);
       }
