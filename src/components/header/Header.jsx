@@ -49,6 +49,9 @@ export const Header = () => {
           refreshToken: refreshToken,
         });
         localStorage.setItem('member_id', response.data.member_id);
+        localStorage.setItem('member_profile', response.data.profile_image);
+        localStorage.setItem('member_email', response.data.social_id);
+        localStorage.setItem('member_name', response.data.nickname);
         navigate('/'); // 로그인 후 홈으로 이동
       }
     };

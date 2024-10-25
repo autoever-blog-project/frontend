@@ -43,3 +43,17 @@ export const fetchTodoList = async () => {
 export const fetchPuppyWrite = async (data) => {
   return await authenticated.post('puppy', data);
 };
+
+// 강아지 이미지 등록
+export const fetchPuppyImageWrite = async (data) => {
+  return await authenticated.post('puppy/img', data);
+};
+
+// 미션 이미지 등록
+export const fetchMissionWrite = async (data) => {
+  return await authenticated.post('mission/img', data);
+};
+
+export const fetchPuppyList = async () => {
+  return await authenticated.get(`mypage/puppy/${localStorage.getItem('puppy_info')}`);
+};

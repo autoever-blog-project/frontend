@@ -11,6 +11,7 @@ import MissionCalendarComp from '@/components/mission/MissionCalendarComp';
 import bathImage from '@/assets/bath.svg';
 import axios from 'axios';
 import missionComplete from '@/assets/missioncomplete.png';
+import { fetchMissionWrite } from '../../api/detail';
 //강아지와 주인 개인미션에 넣을사진
 
 //예정일이 없을때 랜덤 미션 리스트
@@ -32,15 +33,9 @@ function MissionPage() {
   const [todoList, setTodoList] = useState([]);
 
   const fileInputRef = useRef(null);
-
-  const checkDueDay = () => {
+  useEffect(() => {
     setCurrentDay(new Date().toDateString());
-
-    //TODO : axios get todo list, setTodoList에 넣어둠
-    //setIsDueDay(todoList.filter((event) => {
-    //  return event.start === selectedDate;
-    //});
-  };
+  });
 
   //매일 미션이 갱신되야하므로 날짜, 미션을 로컬스토리지에 저장해두고 day가 다르다면 새로 미션 받는다.
   const loadOrSetMission = () => {
@@ -82,11 +77,15 @@ function MissionPage() {
       const formData = new FormData();
       formData.append('image', file);
 
+      // const data = {
+      //   mission_date: new Date().toDateString(),
+      //   member_id: localStorage.getItem('member_id'),
+      // };
+      // for (const key in data) {
+      //   formData.append(key, data[key]);
+      // }
       try {
-        // const response = await axios.post('/api/upload', formData, {
-        //   headers: { 'Content-Type': 'multipart/form-data' },
-        // });  API 코드 (미션 db에 보내기, member_id, status, mission_date)
-        //
+        await fetchMissionWrite(file);
 
         setIsUploaded(!isUploaded);
         setIsComplete(true);
