@@ -4,30 +4,27 @@ import * as S from './PostPage.js';
 import PostCard from '@/components/PostCard/PostCard.jsx';
 import DropDown from '@/components/DropDown/DropDown.jsx';
 import PostPagePagination from './PostPagePagination.jsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { fetchPostWithSearch, fetchPostWithTag } from '../../api/detail.js';
 
 function PostPage() {
   //태그 리스트
   const tags = ['강아지', '여행', '댕스타그램', '산책'];
   const inputData = useLocation().state?.searchData || '';
+  const [postInfos, setPostInfos] = useState([]);
   //inputData로 검색 날리기
-  //더미 데이터
-  const postInfo = {
-    title: 'qwiTw',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quisquam tempora magni dolorum doloremque placeat, incidunt culpa et natus excepturi rem dolorem modi distinctio amet nihil odit? Consequatur, itaque repellendus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quisquam tempora magni dolorum doloremque placeat, incidunt culpa et natus excepturi rem dolorem modi distinctio amet nihil odit? Consequatur, itaque repellendus?',
-    post_date: new Date(),
-    img: '@/assets/0.png',
-    tag: '강아지 마트',
-    emoji: '@/assets/hashtag.png',
-    like_heart: 1000,
+  const fetchData = async () => {
+    try {
+      const postList = await fetchPostWithSearch(inputData, 1);
+      setPostInfos(postList.data.dtoList);
+    } catch (e) {
+      console.log(e);
+    }
   };
-  const member = {
-    nickname: '송지웅',
-  };
-  //게시글 정보 리스트
-  const postInfos = new Array(9).fill(postInfo);
+  useEffect(() => {
+    fetchData();
+  }, [inputData]);
 
   //pagination
   const itemsPerPage = 6;
@@ -41,6 +38,14 @@ function PostPage() {
   const [selectedTag, setSelectedTag] = useState('');
   const sortByTag = (tag) => {
     setSelectedTag(tag);
+    async () => {
+      try {
+        const postList = await fetchPostWithTag(tag, 1);
+        setPostInfos(postList.data.dtoList);
+      } catch (e) {
+        console.log(e);
+      }
+    };
     //postInfos sort하는 기능 (api랑 연동시 제작)
   };
   return (
@@ -60,7 +65,7 @@ function PostPage() {
         <S.PostPagePostGridContainer>
           {currentItems.map((item, idx) => (
             <S.PostPagePostGridPostCardContainer key={idx}>
-              <PostCard postInfo={item} member={member} />
+              <PostCard postInfo={item} />
             </S.PostPagePostGridPostCardContainer>
           ))}
         </S.PostPagePostGridContainer>

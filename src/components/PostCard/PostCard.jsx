@@ -5,7 +5,7 @@ import * as S from './PostCardStyle.js';
 import image from '@/assets/0.png';
 
 //Img 경로 수정
-function PostCard({ postInfo, member }) {
+function PostCard({ postInfo }) {
   return (
     //detailView로 이동
     <div onClick={() => {}}>
@@ -13,7 +13,7 @@ function PostCard({ postInfo, member }) {
         <S.PostCardOverlay className="overlay" />
         <S.PostCardImg src={image} />
         <PostCardBody postInfo={postInfo} />
-        <PostCardFooter postInfo={postInfo} member={member} />
+        <PostCardFooter postInfo={postInfo} />
       </S.PostCardContainer>
     </div>
   );
