@@ -2,11 +2,12 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import plusIcon from '@/assets/PlusIcon.svg';
 import * as S from './WritePageStyle.js';
+import { authenticated } from '../../api/axiosInstance.js';
 
 const WritePageImage = forwardRef((defaultImage, ref) => {
   const imgRef = useRef(null);
   const [preview, setPreview] = useState(defaultImage.defaultImage);
-  const imgUploadHandler = (event) => {
+  const imgUploadHandler = async (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -14,6 +15,16 @@ const WritePageImage = forwardRef((defaultImage, ref) => {
         setPreview(reader.result);
       };
       reader.readAsDataURL(file);
+      const formData = new FormData();
+      if (file) {
+        formData.append('image', file);
+      }
+      console.log(formData);
+      await authenticated.post('/post/img', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
     }
   };
   useImperativeHandle(ref, () => ({

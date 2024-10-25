@@ -8,6 +8,7 @@ import WritePageTag from './WritePageTag.jsx';
 import WritePageTitleInput from './WritePageTitleInput.jsx';
 import chk from '@/assets/0.png';
 import { useLocation } from 'react-router-dom';
+import { fetchPostWrite } from '../../api/detail.js';
 
 function WritePage({ defaultPage }) {
   const defaultPage1 = useLocation().state?.defaultPage || null;
@@ -18,7 +19,8 @@ function WritePage({ defaultPage }) {
   useEffect(() => {
     // contentRef.current.setContent('qwe');
     //defaultPage1이 null이 아니면 selected
-    handleSubmitTag(defaultPage1['tag']);
+    defaultPage1 === null ? setDefaultPageInfo({ tag: [] }) : console.log(defaultPage1['tag']);
+    handleSubmitTag(defaultPageInfo);
   }, []);
   const submitData = { tag: [] };
   //이모지 따라 나올 글귀 리스트
@@ -78,8 +80,8 @@ function WritePage({ defaultPage }) {
     //여기에 이제 전송하면됨
     //post일떄
     if (postFlag === 0) {
+      fetchPostWrite(submitData);
       alert(`input is ${submitData}`);
-      console.log(submitData);
     }
     //edit일 때
     // else {

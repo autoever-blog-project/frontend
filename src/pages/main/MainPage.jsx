@@ -19,18 +19,8 @@ function MainPage() {
         console.log(e);
       }
     };
+    fetchData();
   }, []);
-  //dummyData
-  // const postInfo = {
-  //   title: 'qwiTw',
-  //   content:
-  //     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quisquam tempora magni dolorum doloremque placeat, incidunt culpa et natus excepturi rem dolorem modi distinctio amet nihil odit? Consequatur, itaque repellendus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quisquam tempora magni dolorum doloremque placeat, incidunt culpa et natus excepturi rem dolorem modi distinctio amet nihil odit? Consequatur, itaque repellendus?',
-  //   post_date: new Date(),
-  //   img: '@/assets/0.png',
-  //   tag: '강아지 마트',
-  //   emoji: '@/assets/hashtag.png',
-  //   like_heart: 1000,
-  // };
   const member = {
     nickname: '송지웅',
   };
