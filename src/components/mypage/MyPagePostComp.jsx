@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CardContent,
   CardContentsWrapper,
@@ -8,7 +8,9 @@ import {
   MyPagePostCard,
   MyPagePostList,
 } from './MyPagePostComp.style';
-import tmp from '@/assets/dogprofile.jpg'
+import tmp from '@/assets/dogprofile.jpg';
+import { fetchPostGetAll } from '../../api/detail';
+import emoji from '@/assets/emoji _slightly frowning face.svg';
 
 const initState = {
   dtoList: [],
@@ -26,6 +28,20 @@ const initState = {
 function MyPagePostComp() {
   const [data, setData] = useState(initState);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetchPostGetAll();
+        setData(response.data);
+        console.log(response);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleClickCard = (index) => {
     //디테일페이지로 (index의 페이지)
   };
@@ -33,7 +49,7 @@ function MyPagePostComp() {
   return (
     <>
       <MyPagePostList>
-        {/* {data.dtoList.map((item, i) => {
+        {data.dtoList.map((item, i) => {
           return (
             <MyPagePostCard
               key={i}
@@ -60,26 +76,28 @@ function MyPagePostComp() {
               </CardImageWrapper>
             </MyPagePostCard>
           );
-        })} */}
-        <MyPagePostCard>
-        <CardContentsWrapper>
-          <CardProfileWrapper>
-          <img src={tmp}></img>
-          <h2>홀란드</h2>
-          <p>24-10-23</p>
-          </CardProfileWrapper>
-          <CardTitleWrapper>
+        })}
+        {/* <MyPagePostCard>
+          <CardContentsWrapper>
+            <CardProfileWrapper>
+              <img src={tmp}></img>
+              <h2>홀란드</h2>
+              <p>24-10-23</p>
+            </CardProfileWrapper>
+            <CardTitleWrapper>
+              <img src={tmp}></img>
+              <p>프로필 사진 찍은 날 이에요</p>
+            </CardTitleWrapper>
+            <CardContent>
+              <p>
+                프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용
+              </p>
+            </CardContent>
+          </CardContentsWrapper>
+          <CardImageWrapper>
             <img src={tmp}></img>
-            <p>프로필 사진 찍은 날 이에요</p>
-          </CardTitleWrapper>
-          <CardContent>
-            <p>프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용어버렸어용프로필사진을찍어버렸어용프로필사진을찍어버려썽요프로필사진을찍어버렸어용프로필사진을찍어버렸어용</p>
-          </CardContent>
-        </CardContentsWrapper>
-        <CardImageWrapper>
-          <img src={tmp}></img>
-        </CardImageWrapper>
-        </MyPagePostCard>
+          </CardImageWrapper>
+        </MyPagePostCard> */}
       </MyPagePostList>
     </>
   );
