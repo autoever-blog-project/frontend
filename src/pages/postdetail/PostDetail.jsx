@@ -6,17 +6,19 @@ import { useState } from 'react';
 import { fetchPostDelete } from '@/api/detail';
 import { usePostDetailInfo } from '@/hooks/usePostDetailQuery';
 import WritePage from '../write/WritePage';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export const PostDetail = ({ postId }) => {
+export const PostDetail = () => {
+  const { postId } = useParams();
   const [isEdit, setIsEdit] = useState(false);
-  const data = usePostDetailInfo(1);
-  const { mutate, isPending } = useLikedMutation();
+  const data = usePostDetailInfo(postId);
+  const { mutate, isPending } = useLikedMutation(postId);
   const navigate = useNavigate();
 
   const EMOJI = { happy: '😃', unhappy: '🙃', laugh: '🤣' };
 
   const handleLikeButtonClick = () => {
+    console.log(postId);
     mutate(postId);
   };
 
@@ -33,7 +35,6 @@ export const PostDetail = ({ postId }) => {
   if (data && !isEdit) {
     const { tags, comments, content, emoji, imgId, myLikeHeart, totalLikeHeart, title, memberId } = data;
     const isMyPost = parseInt(localStorage.getItem('member_id')) === memberId;
-    console.log(memberId, parseInt(localStorage.getItem('member_id')), isMyPost);
     return (
       <S.PostDetailWrapper>
         <S.Title>{`${EMOJI[emoji]} ${title}`}</S.Title>

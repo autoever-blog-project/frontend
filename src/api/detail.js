@@ -2,7 +2,7 @@ import { authenticated } from './axiosInstance';
 
 // 포스트 상세페이지
 export const fetchPostDetail = async (postId) => {
-  return await authenticated.get(`post/${1}`);
+  return await authenticated.get(`post/${postId}`);
 };
 
 // 좋아요 기능
@@ -57,13 +57,23 @@ export const fetchPuppyList = async () => {
   return await authenticated.get(`mypage/puppy/${localStorage.getItem('puppy_info')}`);
 };
 
-//게시글 전부 받아오기
-export const fetchPostGetAll = async () => {
-  return await authenticated.get('post/list');
+//게시글 받아오기(정렬된)
+export const fetchPostGetByParam = async (sort, page) => {
+  return await authenticated.get(`post/list/${sort}?page=${page}&size=6`);
 };
 
+//글쓰기
 export const fetchPostWrite = async (data) => {
   return await authenticated.post('post/', data);
+};
+
+//게시글 검색 결과로 받아오기
+export const fetchPostWithSearch = async (data, page) => {
+  return await authenticated.get(`post/list/search?keyword=${data}&page=${page}&size=6`);
+};
+
+export const fetchPostWithTag = async (tag, page) => {
+  return await authenticated.get(`post/list/search/tag/${tag}?page=${page}&size=6`);
 };
 
 // 미션 히스토리 받아오기

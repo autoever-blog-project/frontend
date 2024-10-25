@@ -26,7 +26,7 @@ const WritePageImage = forwardRef(({ defaultImage, subMitImgID }, ref) => {
           'Content-Type': 'multipart/form-data',
         },
       });
-
+      console.log(chk);
       setImgId(chk.data);
       subMitImgID(chk.data);
     }
