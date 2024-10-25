@@ -26,6 +26,13 @@ export const fetchPostDelete = async () => {
   return await authenticated.post('url', 'postId');
 };
 
+// 미션 리스트 데이터
 export const fetchTodoList = async () => {
   return await authenticated.get('mission/calendar/list');
+};
+
+// 일정 보내기
+
+export const fetchTodoWrite = async (data) => {
+  return await authenticated.post('todo/', data);
 };
