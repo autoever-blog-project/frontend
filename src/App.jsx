@@ -56,7 +56,7 @@ function App() {
           ),
         },
         {
-          path: '/detail',
+          path: '/detail/:postId',
           element: (
             <PuppyInfoRoute>
               <PostDetail />

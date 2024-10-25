@@ -2,7 +2,7 @@ import { authenticated } from './axiosInstance';
 
 // 포스트 상세페이지
 export const fetchPostDetail = async (postId) => {
-  return await authenticated.get(`post/${1}`);
+  return await authenticated.get(`post/${postId}`);
 };
 
 // 좋아요 기능
@@ -67,7 +67,6 @@ export const fetchPostWrite = async (data) => {
   return await authenticated.post('post/', data);
 };
 
-
 //게시글 검색 결과로 받아오기
 export const fetchPostWithSearch = async (data, page) => {
   return await authenticated.get(`post/list/search?keyword=${data}&page=${page}&size=6`);
@@ -75,6 +74,7 @@ export const fetchPostWithSearch = async (data, page) => {
 
 export const fetchPostWithTag = async (tag, page) => {
   return await authenticated.get(`post/list/search/tag/${tag}?page=${page}&size=6`);
+};
 
 // 미션 히스토리 받아오기
 export const fetchMissionList = async () => {

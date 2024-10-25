@@ -24,8 +24,11 @@ export const useLikedMutation = (postId) => {
         if (!old) return;
         return {
           ...old,
-          likeCount: old.isLiked ? old.likeCount - 1 : old.likeCount + 1,
-          isLiked: !old.isLiked,
+          data: {
+            ...old.data,
+            totalLikeHeart: old.data.totalLikeHeart ? old.data.totalLikeHeart - 1 : old.datatotalLikeHeart + 1,
+            myLikeHeart: !old.data.myLikeHeart,
+          },
         };
       });
 
