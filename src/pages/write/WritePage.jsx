@@ -6,15 +6,24 @@ import WritePageRadio from './WritePageRadio.jsx';
 import * as S from './WritePageStyle.js';
 import WritePageTag from './WritePageTag.jsx';
 import WritePageTitleInput from './WritePageTitleInput.jsx';
+import chk from '@/assets/0.png';
+import { useLocation } from 'react-router-dom';
+import { fetchPostWrite } from '../../api/detail.js';
 
-function WritePage() {
+function WritePage({ defaultPage }) {
+  const defaultPage1 = useLocation().state?.defaultPage || null;
   const imgRef = useRef();
   const contentRef = useRef();
   const [postFlag, setPostFlag] = useState(0);
+  const [defaultPageInfo, setDefaultPageInfo] = useState(defaultPage);
+  const [imgId, setimgId] = useState(null);
   useEffect(() => {
     // contentRef.current.setContent('qwe');
+    //defaultPage1이 null이 아니면 selected
+    defaultPage1 === null ? setDefaultPageInfo({ tags: [] }) : console.log(defaultPage1['tags']);
+    handleSubmitTag(defaultPageInfo);
   }, []);
-  const submitData = { tag: [] };
+  const submitData = { tags: [] };
   //이모지 따라 나올 글귀 리스트
   const emojies = ['q', 'w', 'e'];
   const parsingContent = (content, before, after) => {
@@ -25,10 +34,10 @@ function WritePage() {
     return content;
   };
   const handleSubmitTag = (selectedTag) => {
-    if (submitData['tag'].includes(selectedTag)) {
-      return (submitData['tag'] = submitData['tag'].filter((i) => i !== selectedTag));
+    if (submitData['tags'].includes(selectedTag)) {
+      return (submitData['tags'] = submitData['tags'].filter((i) => i !== selectedTag));
     } else {
-      return (submitData['tag'] = [...submitData['tag'], selectedTag]);
+      return (submitData['tags'] = [...submitData['tags'], selectedTag]);
     }
   };
   const handleSubmit = () => {
@@ -39,29 +48,47 @@ function WritePage() {
       });
       submitData['emoji'] = emojies[submitData['emoji']];
     }
-    if (submitData['tag'].length == 0) {
+    if (submitData['title'] === null) {
+      alert('제목을 정해주세요!');
+      return;
+    }
+    if (submitData['emoji'] === null) {
+      alert('기분을 정해주세요!');
+      return;
+    }
+
+    if (submitData['tags'].length == 0) {
       alert('카테고리를 정해주세요!');
+      return;
     } else {
-      submitData['tag'] = submitData['tag'].map((item) => ({ name: item }));
+      submitData['tags'] = submitData['tags'].map((item) => ({ name: item }));
     }
     if (contentRef.current) {
       var contentBeforeParsing = contentRef.current.getContent();
       submitData['content'] = parsingContent(contentBeforeParsing, ['<p>', '</p>', '<br>'], ['', '\r\n', '\r\n']);
     } else {
       alert('내용을 입력해주세요!');
+      return;
     }
 
     if (imgRef.current) {
-      const inputImg = imgRef.current.getImage();
-      submitData['img'] = inputImg;
+      // const inputImg = imgRef.current.getImage();
+      // submitData['img'] = inputImg;
     } else {
       alert('이미지를 입력해주세요!');
+      return;
     }
     //여기에 이제 전송하면됨
     //post일떄
     if (postFlag === 0) {
-      alert(`input is ${submitData}`);
+      submitData[''];
+      //string to num
+      submitData['memberId'] = parseInt(localStorage.getItem('member_id'));
+      (submitData['totalLikeHeart'] = 0), (submitData['my_like_heart'] = false);
+      submitData['imgId'] = imgId;
       console.log(submitData);
+      fetchPostWrite(submitData);
+      alert(`input is ${submitData}`);
     }
     //edit일 때
     // else {
@@ -70,30 +97,43 @@ function WritePage() {
   const formRef = useRef(null);
   return (
     <div>
-      <S.WritePageViewContainer>
-        <form ref={formRef} style={{ width: '100%', paddingLeft: 5 }}>
-          <WritePageTitleInput defaultvalue={''} />
-          {/* <S.WritePageTextInput
-            type="text"
-            name="title"
-            style={{ fontSize: 40, paddingLeft: 10 }}
-            placeholder="제목을 입력하세요"
-          /> */}
-          {/* 라디오 선택시 효과 및 선택값 보여주기 */}
-          <WritePageRadio defaultEmoji={''} />
-        </form>
-        <WritePageTag onSubmitTags={handleSubmitTag} defaultTags={['전체']} />
-        <WritePageEditor defaultValue={''} ref={contentRef} />
-        <WritePageImage ref={imgRef} />
-        <S.WritePageSubmitButton
-          type="button"
-          onClick={() => {
-            handleSubmit();
-          }}
-        >
-          완료
-        </S.WritePageSubmitButton>
-      </S.WritePageViewContainer>
+      {defaultPage1 === null ? (
+        <S.WritePageViewContainer>
+          <form ref={formRef} style={{ width: '100%', paddingLeft: 5 }}>
+            <WritePageTitleInput defaultvalue={''} />
+            <WritePageRadio defaultEmoji={''} />
+          </form>
+          <WritePageTag onSubmitTags={handleSubmitTag} defaultTags={[]} />
+          <WritePageEditor defaultValue={''} ref={contentRef} />
+          <WritePageImage ref={imgRef} defaultImage={''} subMitImgID={setimgId} />
+          <S.WritePageSubmitButton
+            type="button"
+            onClick={() => {
+              handleSubmit();
+            }}
+          >
+            완료
+          </S.WritePageSubmitButton>
+        </S.WritePageViewContainer>
+      ) : (
+        <S.WritePageViewContainer>
+          <form ref={formRef} style={{ width: '100%', paddingLeft: 5 }}>
+            <WritePageTitleInput defaultvalue={defaultPage1['title']} />
+            <WritePageRadio defaultEmoji={defaultPage1['emoji']} />
+          </form>
+          <WritePageTag onSubmitTags={handleSubmitTag} defaultTags={defaultPage1['tags']} />
+          <WritePageEditor defaultValue={defaultPage1['content']} ref={contentRef} />
+          <WritePageImage ref={imgRef} defaultImage={defaultPage1['img']} subMitImgID={setimgId} />
+          <S.WritePageSubmitButton
+            type="button"
+            onClick={() => {
+              handleSubmit();
+            }}
+          >
+            완료
+          </S.WritePageSubmitButton>
+        </S.WritePageViewContainer>
+      )}
     </div>
   );
 }

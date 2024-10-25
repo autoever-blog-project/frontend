@@ -18,7 +18,6 @@ const WritePageEditor = forwardRef(({ defaultValue }, ref) => {
   }));
   useEffect(() => {
     setEditorHtml(`<p>${defaultValue}</p>`);
-    console.log(defaultValue);
   }, []);
   const modules = {
     toolbar: [

@@ -57,3 +57,12 @@ export const fetchMissionWrite = async (data) => {
 export const fetchPuppyList = async () => {
   return await authenticated.get(`mypage/puppy/${localStorage.getItem('puppy_info')}`);
 };
+
+//게시글 전부 받아오기
+export const fetchPostGetAll = async () => {
+  return await authenticated.get('post/list');
+};
+
+export const fetchPostWrite = async (data) => {
+  return await authenticated.post('post/', data);
+};

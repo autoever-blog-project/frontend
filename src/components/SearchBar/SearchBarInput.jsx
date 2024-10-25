@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as S from './SearchBarStyle.js';
 
 // eslint-disable-next-line react/prop-types
-function SearchBarInput({ onSubmitData }) {
+function SearchBarInput({ defaultValue, onSubmitData }) {
   const defaultPlaceholder = '검색어를 입력해주세요.';
   const [placeHolder, setPlaceHolder] = useState(defaultPlaceholder);
 
@@ -18,6 +18,7 @@ function SearchBarInput({ onSubmitData }) {
         onBlur={() => {
           setPlaceHolder(defaultPlaceholder);
         }}
+        defaultValue={defaultValue}
       ></S.SearchBarInputField>
     </div>
   );

@@ -2,13 +2,15 @@ import SearchBarInput from './SearchBarInput';
 import { useState } from 'react';
 import * as S from './SearchBarStyle.js';
 import SearchBarButton from './SearchBarButton.jsx';
+import { useNavigate } from 'react-router-dom';
 
-function SearchBar() {
+function SearchBar({ defaultValue }) {
   const [inputData, setInputData] = useState('');
+  const navigate = useNavigate();
 
   //입력값으로 검색
-  const searchWithData = () => {
-    console.log(inputData);
+  const searchWithData = (inputData) => {
+    navigate('/post', { state: { searchData: inputData } });
   };
 
   const handleKeyup = (e) => {
@@ -21,7 +23,7 @@ function SearchBar() {
       <S.SearchBarContainer onKeyUp={handleKeyup}>
         <SearchBarButton pressButton={searchWithData} />
         <div style={{ flexGrow: 1, marginRight: 25 }}>
-          <SearchBarInput onSubmitData={setInputData}></SearchBarInput>
+          <SearchBarInput defaultValue={defaultValue} onSubmitData={setInputData}></SearchBarInput>
         </div>
       </S.SearchBarContainer>
     </div>

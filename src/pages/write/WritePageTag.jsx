@@ -18,7 +18,6 @@ function WritePageTag({ defaultTags, onSubmitTags }) {
   };
   useEffect(() => {
     setSelectedTag(defaultTags);
-    console.log(selectedTag, defaultTags);
   }, []);
 
   return (
