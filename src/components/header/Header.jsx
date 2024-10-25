@@ -42,17 +42,20 @@ export const Header = () => {
       if (accessToken && refreshToken) {
         localStorage.setItem('actk', accessToken);
         localStorage.setItem('rftk', refreshToken);
-        setIsLogin(true); // 로그인 상태 업데이트
+        setIsLogin(true);
 
         const response = await authenticated.post('/login/oauth/kakao', {
           accessToken: accessToken,
           refreshToken: refreshToken,
         });
+
         localStorage.setItem('member_id', response.data.member_id);
         localStorage.setItem('member_profile', response.data.profile_image);
         localStorage.setItem('member_email', response.data.social_id);
         localStorage.setItem('member_name', response.data.nickname);
         navigate('/'); // 로그인 후 홈으로 이동
+        localStorage.setItem('point', 1000);
+        navigate('/');
       }
     };
 
@@ -84,6 +87,10 @@ export const Header = () => {
           </S.MenuButton>
           {isLogin ? (
             <>
+              <S.PointWrapper>
+                <S.Point>{localStorage.getItem('point')}</S.Point>
+                <S.Point>포인트</S.Point>
+              </S.PointWrapper>
               <S.MenuProfile onClick={() => handleMovePageClick('mypage')}>
                 <S.MenuProfileImg src={localStorage.getItem('member_profile')}></S.MenuProfileImg>
               </S.MenuProfile>

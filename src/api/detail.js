@@ -1,29 +1,28 @@
 import { authenticated } from './axiosInstance';
 
 // 포스트 상세페이지
-export const fetchPostDetail = async () => {
-  return await authenticated.get('url');
+export const fetchPostDetail = async (postId) => {
+  return await authenticated.get(`post/${1}`);
 };
 
 // 좋아요 기능
-export const fetchLiked = async () => {
-  console.log('hi');
-  return await authenticated.post('');
+export const fetchLiked = async (postId) => {
+  return await authenticated.post(`post/${postId}/like`);
 };
 
 // 댓글 작성
-export const fetchCommentWrite = async () => {
-  return await authenticated.post('url', 'data');
+export const fetchCommentWrite = async (postId, data) => {
+  return await authenticated.post(`post/${postId}/comment`, data);
 };
 
 // 게시글 수정
-export const fetchPostUpdate = async () => {
-  return await authenticated.post('url', 'postId');
+export const fetchPostUpdate = async (postId, data) => {
+  return await authenticated.put(`post/${postId}`, data);
 };
 
 // 게시글 삭제
-export const fetchPostDelete = async () => {
-  return await authenticated.post('url', 'postId');
+export const fetchPostDelete = async (postId) => {
+  return await authenticated.delete(`post/${postId}`);
 };
 
 // 일정 보내기
