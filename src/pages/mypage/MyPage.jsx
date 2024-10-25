@@ -79,7 +79,7 @@ function MyPage() {
   const getAge = (date) => {
     // date = "2024-02-02"
     const year = parseInt(date);
-
+    console.log();
     const age = 2025 - year;
     return age;
   };
@@ -118,7 +118,7 @@ function MyPage() {
           </TebmenuWrapper>
           <TebContentsWrapper>{activeTab === 0 ? <MyPagePostComp /> : <MyPageCalendarComp />}</TebContentsWrapper>
         </ContentsContainer>
-        <MemberDeleteButton>탈퇴하기</MemberDeleteButton>
+        {/* <MemberDeleteButton>탈퇴하기</MemberDeleteButton> */}
       </Container>
     </>
   );
