@@ -5,14 +5,16 @@ import PostCard from '@/components/PostCard/PostCard.jsx';
 import DropDown from '@/components/DropDown/DropDown.jsx';
 import PostPagePagination from './PostPagePagination.jsx';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchPostWithSearch, fetchPostWithTag } from '../../api/detail.js';
+import writedog from '@/assets/writedog.png';
 
 function PostPage() {
   //태그 리스트
   const tags = ['강아지', '여행', '댕스타그램', '산책'];
   const inputData = useLocation().state?.searchData || '';
   const [postInfos, setPostInfos] = useState([]);
+  const navigate = useNavigate();
   //inputData로 검색 날리기
   const fetchData = async () => {
     try {
@@ -48,6 +50,10 @@ function PostPage() {
     };
     //postInfos sort하는 기능 (api랑 연동시 제작)
   };
+
+  const handleWritePostClick = () => {
+    navigate('/write');
+  };
   return (
     <div>
       <S.PostPageViewBodyContainer>
@@ -71,6 +77,9 @@ function PostPage() {
         </S.PostPagePostGridContainer>
         <PostPagePagination beforeCurrentPage={currentPage} currentPage={handleCurrentPage} totalPages={totalPages} />
       </S.PostPageViewBodyContainer>
+      <S.WritePostButton onClick={handleWritePostClick}>
+        <S.WritePostImg src={writedog}></S.WritePostImg>
+      </S.WritePostButton>
     </div>
   );
 }
