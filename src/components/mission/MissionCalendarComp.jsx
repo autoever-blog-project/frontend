@@ -6,6 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import temp from '@/assets/bath.svg';
 import MissionModalComp from './MissionModalComp';
 import './MissionCalendarComp.css';
+import { fetchMissionList } from '../../api/detail';
 
 function MissionCalendarComp({ refresh }) {
   //TODO : axios get으로 eventsArray 채워주기 + 파일업로드 될때마다 여기로 props 내려줘서 새로고침해주기. /Line:21~
@@ -22,8 +23,24 @@ function MissionCalendarComp({ refresh }) {
   const [isModal, setIsModal] = useState(false);
 
   useEffect(() => {
-    // TODO : setEventsArray(API 미션리스트 get)
-    console.log('eventsArray update');
+    const fetchData = async () => {
+      try {
+        const missionList = await fetchMissionList(); // 여러 개의 항목을 가져옴
+
+        const events = missionList.data.map((item) => ({
+          title: item.content,
+          start: item.missionDate,
+          allDay: true,
+          //imageurl : //이미지아이디값으로 엑시오스해서 url받아오기
+        })); // 각 항목에서 필요한 속성만 추출
+        setEventsArray(events); // 추출한 데이터를 상태에 설정
+      } catch (error) {
+        console.error('Error list event:', error);
+      }
+
+      fetchData();
+      console.log('eventsArray update');
+    };
   }, [refresh]);
 
   useEffect(() => {
@@ -54,12 +71,17 @@ function MissionCalendarComp({ refresh }) {
     if (info.event.extendedProps.imageurl) {
       const img = document.createElement('img');
       img.src = info.event.extendedProps.imageurl;
-      img.style.width = '100%'; // 원하는 크기로 조정
+      img.style.width = '130px'; // 원하는 크기로 조정
       img.style.height = '80px'; // 비율 유지
       img.style.borderRadius = '5px'; // 모서리 둥글게 설정 (선택 사항)
 
       info.el.appendChild(img); // 이미지 삽입
     }
+  };
+
+  const handleDayCellContent = (arg) => {
+    const dayNumber = arg.dayNumberText.replace('일', '');
+    return dayNumber;
   };
 
   return (
@@ -69,6 +91,7 @@ function MissionCalendarComp({ refresh }) {
         events={eventsArray}
         // dateClick={handleDateClick}
         eventClick={handleEventClick}
+        dayCellContent={handleDayCellContent}
         eventDidMount={eventDidMount}
         headerToolbar={{
           left: 'prev,next today',
@@ -78,6 +101,7 @@ function MissionCalendarComp({ refresh }) {
         customButtons={{ today: { text: '오늘' } }}
         showNonCurrentDates={false}
         height="auto"
+        locale="ko"
       />
       {isModal && <MissionModalComp onClose={closeModal} missionUrl={temp} missionDate={selectEventDay} />}
     </div>

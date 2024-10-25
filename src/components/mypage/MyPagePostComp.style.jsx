@@ -66,7 +66,6 @@ export const CardTitleWrapper = styled.div`
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
-    
   }
 `;
 
@@ -91,8 +90,8 @@ export const CardContent = styled.div`
 export const CardImageWrapper = styled.div`
   width: 250px;
   height: 250px;
-  img{
-  width: 250px;
-  height: 250px;
+  img {
+    width: 250px;
+    height: 250px;
   }
-`
+`;

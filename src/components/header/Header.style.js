@@ -103,6 +103,24 @@ export const MenuLogin = styled.button`
   }
 `;
 
+export const MenuLogout = styled.button`
+  display: flex;
+  border: none;
+  margin: 0 10px;
+  background: ${theme.colors.mainBlue};
+  width: 100x;
+  height: 40px;
+  padding: 6px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  font-size: 18px;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-3px);
+    color: white;
+  }
 export const Point = styled.div`
   font-size: 14px;
   width: 40px;

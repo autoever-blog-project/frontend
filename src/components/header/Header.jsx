@@ -50,6 +50,10 @@ export const Header = () => {
         });
 
         localStorage.setItem('member_id', response.data.member_id);
+        localStorage.setItem('member_profile', response.data.profile_image);
+        localStorage.setItem('member_email', response.data.social_id);
+        localStorage.setItem('member_name', response.data.nickname);
+        navigate('/'); // 로그인 후 홈으로 이동
         localStorage.setItem('point', 1000);
         navigate('/');
       }
@@ -88,9 +92,9 @@ export const Header = () => {
                 <S.Point>포인트</S.Point>
               </S.PointWrapper>
               <S.MenuProfile onClick={() => handleMovePageClick('mypage')}>
-                <S.MenuProfileImg src="https://i.ibb.co/1QzR2ZN/seolyoon.jpg"></S.MenuProfileImg>
+                <S.MenuProfileImg src={localStorage.getItem('member_profile')}></S.MenuProfileImg>
               </S.MenuProfile>
-              <S.MenuLogin onClick={handleLogoutClick}>로그아웃</S.MenuLogin>
+              <S.MenuLogout onClick={handleLogoutClick}>로그아웃</S.MenuLogout>
             </>
           ) : (
             <S.MenuLogin onClick={handleLoginClick}>로그인</S.MenuLogin>

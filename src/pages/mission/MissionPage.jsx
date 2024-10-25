@@ -12,15 +12,17 @@ import MissionCalendarComp from '@/components/mission/MissionCalendarComp';
 import bathImage from '@/assets/bath.svg';
 import axios from 'axios';
 import missionComplete from '@/assets/missioncomplete.png';
+import { fetchMissionWrite, fetchTodoList } from '../../api/detail';
 import * as WP from '@/pages/write/WritePageStyle.js';
 import plusIcon from '@/assets/PlusIcon.svg';
-//강아지와 주인 개인미션에 넣을사진
-
+import tkscor from '@/assets/tkscor.jpg';
+import footimage from '@/assets/footimage.jpg';
+import duedatejpg from '@/assets/duedateevent.jpg';
 //예정일이 없을때 랜덤 미션 리스트
 const missions = [
   { mission: '목욕 시키고', imageUrl: bathImage },
-  { mission: '산책 하고', imageUrl: bathImage },
-  { mission: '발 닦아주고', imageUrl: bathImage },
+  { mission: '산책 하고', imageUrl: tkscor },
+  { mission: '발 닦아주고', imageUrl: footimage },
 ];
 
 function MissionPage() {
@@ -36,14 +38,37 @@ function MissionPage() {
 
   const fileInputRef = useRef(null);
 
-  const checkDueDay = () => {
-    setCurrentDay(new Date().toDateString());
+  useEffect(() => {
+    if (localStorage.getItem('isDueDay') !== null && localStorage.getItem('missionData') === null) {
+      const today = new Date().toISOString().slice(0, 10);
 
-    //TODO : axios get todo list, setTodoList에 넣어둠
-    //setIsDueDay(todoList.filter((event) => {
-    //  return event.start === selectedDate;
-    //});
-  };
+      const fetchData = async () => {
+        try {
+          const todoList = await fetchTodoList();
+          console.log(todoList);
+
+          const dueTodayContent = todoList.data.find((item) => item.dueDate === today)?.content || null;
+          console.log('오늘 마감일인 첫 번째 항목의 content:', dueTodayContent);
+
+          const missionData = {
+            date: new Date().toDateString(),
+            mission: { mission: dueTodayContent, imageUrl: duedatejpg },
+          };
+
+          setTodayMission(JSON.stringify(missionData));
+          localStorage.setItem('missionData', JSON.stringify(missionData));
+        } catch (error) {
+          console.error('Error fetching todo list:', error);
+        }
+      };
+
+      fetchData();
+    }
+  }, []);
+
+  useEffect(() => {
+    setCurrentDay(new Date().toDateString());
+  });
 
   //매일 미션이 갱신되야하므로 날짜, 미션을 로컬스토리지에 저장해두고 day가 다르다면 새로 미션 받는다.
   const loadOrSetMission = () => {
@@ -84,12 +109,13 @@ function MissionPage() {
     if (file) {
       const formData = new FormData();
       formData.append('image', file);
-
+      formData.append('memberId', localStorage.getItem('member_id'));
+      formData.append('missionDate', new Date().toDateString());
+      // for (const key in data) {
+      //   formData.append(key, data[key]);
+      // }
       try {
-        // const response = await axios.post('/api/upload', formData, {
-        //   headers: { 'Content-Type': 'multipart/form-data' },
-        // });  API 코드 (미션 db에 보내기, member_id, status, mission_date)
-        //
+        // await fetchMissionWrite(formData);
 
         setIsUploaded(!isUploaded);
         setIsComplete(true);
@@ -140,7 +166,7 @@ function MissionPage() {
                 <p>완료!!!!</p>
               </TextContainer>
             </>
-          ) : isDueDay ? (
+          ) : todayMission && isDueDay ? (
             todayMission && ( // 개인미션일때는 고정 이미지url , 강아지와 주인이 의욕에 불타는사진
               <>
                 <ImageContainer>
