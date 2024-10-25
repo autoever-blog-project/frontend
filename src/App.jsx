@@ -8,6 +8,7 @@ import WritePage from './pages/write/WritePage.jsx';
 // import { PostDetail } from './pages/postdetail/PostDetail.jsx';
 import { PostDetail } from './pages/postdetail/PostDetail.jsx';
 import MyPage from './pages/mypage/MyPage.jsx';
+import { Auction } from './pages/auction/Auction.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -45,6 +46,14 @@ function App() {
         {
           path: '/mypage',
           element: <MyPage />,
+        },
+        {
+          path: '/auction',
+          element: (
+            // <ProtectedRoute>
+            <Auction />
+            // </ProtectedRoute>
+          ),
         },
       ],
     },
