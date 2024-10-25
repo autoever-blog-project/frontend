@@ -46,12 +46,8 @@ const SignUpPage = () => {
   return (
     <PageWrapper>
       <Content>
-        <h2>강아지 정보 입력</h2>
+        <h2>강아지 정보를 입력 해주세요.</h2>
         <form onSubmit={handleSubmit}>
-          <ImageInput>
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-            {image && <img src={image} />}
-          </ImageInput>
           <InputField>
             <label htmlFor="name">이름:</label>
             <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -61,7 +57,7 @@ const SignUpPage = () => {
             <input type="date" id="birthday" value={birthday} onChange={(e) => setBirthday(e.target.value)} />
           </InputField>
 
-          <SubmitButton type="submit">제출</SubmitButton>
+          <SubmitButton type="submit">입력하기</SubmitButton>
         </form>
       </Content>
     </PageWrapper>
@@ -83,6 +79,9 @@ const Content = styled.div`
   border-radius: 8px;
   width: 400px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  h2 {
+    margin-bottom: 70px;
+  }
 `;
 
 const ImageInput = styled.div`
@@ -90,7 +89,7 @@ const ImageInput = styled.div`
 `;
 
 const InputField = styled.div`
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   label {
     display: block;
     margin-bottom: 5px;

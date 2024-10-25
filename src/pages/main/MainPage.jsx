@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { fetchPostGetAll } from '../../api/detail.js';
 
 function MainPage() {
+  return;
   const [postInfo, setPostInfo] = useState(null);
   useEffect(() => {
     const fetchData = async () => {

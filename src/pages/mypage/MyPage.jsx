@@ -33,7 +33,7 @@ function MyPage() {
 
   const [graghData, setGraghData] = useState([
     {
-      id: '모아',
+      id: '체중 변화',
       color: 'hsl(281, 70%, 50%)',
       data: [
         {
@@ -77,7 +77,10 @@ function MyPage() {
   const handleTebButton = (i) => setActiveTab(i);
 
   const getAge = (date) => {
-    const age = 0;
+    // date = "2024-02-02"
+    const year = parseInt(date);
+
+    const age = 2025 - year;
     return age;
   };
 
@@ -91,7 +94,7 @@ function MyPage() {
             </ProfileImageWrapper>
             <ProfileTextWrapper>
               <h1>{puppyData.name}</h1>
-              <p>{getAge(puppyData.birth)}</p>
+              <p>{getAge(puppyData.birth)}살</p>
               <p>{puppyData.birth}</p>
             </ProfileTextWrapper>
           </ProfileContent>

@@ -58,10 +58,15 @@ function MyPageCalendarComp() {
     setIsModal(true);
   };
   useEffect(() => {
+    const today = new Date().toISOString().slice(0, 10);
+
     const fetchData = async () => {
       try {
         const todoList = await fetchTodoList(); // 여러 개의 항목을 가져옴
-        console.log(todoList);
+        const isDueToday = todoList.data.some((item) => item.dueDate === today);
+        if (isDueToday) {
+          localStorage.setItem('isDueDay', 'true');
+        }
         const events = todoList.data.map((item) => ({
           title: item.content,
           start: item.dueDate,
@@ -70,6 +75,7 @@ function MyPageCalendarComp() {
             status: item.status,
           },
         })); // 각 항목에서 필요한 속성만 추출
+
         setEventsArray(events); // 추출한 데이터를 상태에 설정
       } catch (error) {
         console.error('Error list event:', error);
@@ -88,6 +94,11 @@ function MyPageCalendarComp() {
     setIsModal(false);
   };
 
+  const handleDayCellContent = (arg) => {
+    const dayNumber = arg.dayNumberText.replace('일', '');
+    return dayNumber;
+  };
+
   return (
     <div id="calendar2">
       <FullCalendar
@@ -101,13 +112,17 @@ function MyPageCalendarComp() {
         //selectMirror={true} // 이벤트를 추가할 때 선택한 영역을 표시합니다.
         eventBackgroundColor="#ff0000" // 이벤트의 배경색을 설정합니다.
         eventBorderColor="#ff0000" // 이벤트의 테두리 색을 설정합니다.
+        dayCellContent={handleDayCellContent}
         //allDay={true} // 이벤트가 하루 종일인지 여부를 지정합니다.
         timeZone="UTC" // 캘린더의 시간대를 UTC로 설정합니다.
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek',
+          right: '',
         }}
+        locale="ko"
+        customButtons={{ today: { text: '오늘' } }}
+        showNonCurrentDates={false}
       />
       {isModal && (
         <MyPageModalComp

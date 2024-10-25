@@ -51,7 +51,7 @@ export const fetchPuppyImageWrite = async (data) => {
 
 // 미션 이미지 등록
 export const fetchMissionWrite = async (data) => {
-  return await authenticated.post('mission/img', data);
+  return await authenticated.post('add', data);
 };
 
 export const fetchPuppyList = async () => {
@@ -65,4 +65,9 @@ export const fetchPostGetAll = async () => {
 
 export const fetchPostWrite = async (data) => {
   return await authenticated.post('post/', data);
+};
+
+// 미션 히스토리 받아오기
+export const fetchMissionList = async () => {
+  return await authenticated.get('mission/calendar/list');
 };

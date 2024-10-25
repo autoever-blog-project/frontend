@@ -85,9 +85,9 @@ export const Header = () => {
           {isLogin ? (
             <>
               <S.MenuProfile onClick={() => handleMovePageClick('mypage')}>
-                <S.MenuProfileImg src="https://i.ibb.co/1QzR2ZN/seolyoon.jpg"></S.MenuProfileImg>
+                <S.MenuProfileImg src={localStorage.getItem('member_profile')}></S.MenuProfileImg>
               </S.MenuProfile>
-              <S.MenuLogin onClick={handleLogoutClick}>로그아웃</S.MenuLogin>
+              <S.MenuLogout onClick={handleLogoutClick}>로그아웃</S.MenuLogout>
             </>
           ) : (
             <S.MenuLogin onClick={handleLoginClick}>로그인</S.MenuLogin>

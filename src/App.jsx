@@ -45,6 +45,8 @@ function App() {
         //   path: '/mypage',
         //   element: <MyPage />,
         // },
+        {
+          path: '/mission',
           element: (
             <ProtectedRoute>
               {/* <PuppyInfoRoute> */}

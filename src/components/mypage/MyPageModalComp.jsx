@@ -31,6 +31,7 @@ function MyPageModalComp({ onClose, eventList, selectDay, handleRefresh }) {
       console.log('Event added successfully');
       setNewEvent('');
       handleRefresh();
+      handleClose();
     } catch (error) {
       console.error('Error adding event:', error);
     }
