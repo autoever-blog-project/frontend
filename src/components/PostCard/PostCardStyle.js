@@ -8,6 +8,8 @@ export const PostCardContainer = styled.div`
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
+  margin-bottom: 10px;
+  box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   &:hover .overlay {
     opacity: 0.5;
@@ -32,10 +34,10 @@ export const PostCardOverlay = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 200px;
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
-  transition: 'opacity 0.3s ease';
+  transition: opacity 0.3s ease;
 `;
 
 export const PostCardImg = styled.img`
@@ -60,12 +62,12 @@ export const PostCardFooterContainer = styled.div`
   width: (100%-20px);
   height: (45) px;
   display: flex;
-  padding-left: 5px;
-  padding-right: 5px;
-  /* padding-bottom: 15px; */
+  padding: 0 10px;
+  padding-bottom: 15px;
   align-items: center;
   margin: 0 auto;
   justify-content: space-between;
+  position: relative;
 `;
 
 //PostCardBody 구성요소
