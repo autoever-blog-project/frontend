@@ -39,39 +39,37 @@ function PostPage() {
   };
   const [selectedTag, setSelectedTag] = useState('');
   const sortByTag = (tag) => {
-    console.log(tag);
     setSelectedTag(tag);
     (async () => {
       try {
-        console.log('hi');
-        const postList = await fetchPostWithTag(tag, 1);
-        setPostInfos(postList.data.dtoList);
-      } catch (e) {
-        console.log(e);
-      }
-    })();
-    //postInfos sort하는 기능 (api랑 연동시 제작)
-  };
-  const handleSortByParams = (param) => {
-    console.log(param);
-
-    async () => {
-      try {
-        if (param === '좋아요 순') {
-          const postList = await fetchPostGetByParam('likes', 1);
-          setPostInfos(postList.data.dtoList);
-        } else if (param === '최신 순') {
-          const postList = await fetchPostGetByParam('latest', 1);
-          setPostInfos(postList.data.dtoList);
-        } else {
-          const postList = await fetchPostGetByParam('earlist', 1);
+        if (tags.includes(tag)) {
+          const postList = await fetchPostWithTag(tag, 1);
           setPostInfos(postList.data.dtoList);
         }
       } catch (e) {
         console.log(e);
       }
-    };
+    })();
   };
+
+  const handleSortByParams = (param) => {
+    if (param === '좋아요 순') {
+      setPostInfos((prev) => [...prev].sort((a, b) => b.totalLikeHeart - a.totalLikeHeart));
+      return;
+    }
+
+    if (param === '최신 순') {
+      setPostInfos((prev) => [...prev].sort((a, b) => new Date(b.postDate) - new Date(a.postDate)));
+      return;
+    }
+
+    if (param === '오래된 순') {
+      setPostInfos((prev) => [...prev].sort((a, b) => new Date(a.postDate) - new Date(b.postDate)));
+      return;
+    }
+  };
+
+  console.log(postInfos);
   const handleWritePostClick = () => {
     navigate('/write');
   };
