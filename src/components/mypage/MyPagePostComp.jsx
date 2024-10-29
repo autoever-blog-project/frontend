@@ -82,7 +82,7 @@ function MyPagePostComp() {
                 </CardContent>
               </CardContentsWrapper>
               <CardImageWrapper>
-                <img src={`/src/assets/dog${item.postId}`}></img>
+                <img src={`/src/assets/dog${item.postId}.jpg`}></img>
               </CardImageWrapper>
             </MyPagePostCard>
           );
