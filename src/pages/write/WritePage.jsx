@@ -6,7 +6,8 @@ import WritePageRadio from './WritePageRadio.jsx';
 import * as S from './WritePageStyle.js';
 import WritePageTag from './WritePageTag.jsx';
 import WritePageTitleInput from './WritePageTitleInput.jsx';
-import { fetchPostWrite } from '../../api/detail.js';
+import { fetchPostWrite, fetchPostUpdate } from '../../api/detail.js';
+import { useNavigate } from 'react-router-dom';
 
 function WritePage({ defaultPage }) {
   const defaultPage1 = defaultPage || null;
@@ -15,10 +16,15 @@ function WritePage({ defaultPage }) {
   const [postFlag, setPostFlag] = useState(0);
   const [defaultPageInfo, setDefaultPageInfo] = useState(defaultPage);
   const [imgId, setimgId] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
     // contentRef.current.setContent('qwe');
     //defaultPage1이 null이 아니면 selected
-    defaultPage1 === null ? setDefaultPageInfo({ tags: [] }) : defaultPage1['tags'];
+    defaultPage == null ? setDefaultPageInfo({ tags: [] }) : defaultPage1['tags'];
+
+    if (defaultPage !== null) {
+      setPostFlag(1);
+    }
     handleSubmitTag(defaultPageInfo);
   }, []);
   const submitData = { tags: [] };
@@ -33,6 +39,7 @@ function WritePage({ defaultPage }) {
   };
 
   console.log(defaultPage1);
+  console.log(postFlag);
   const handleSubmitTag = (selectedTag) => {
     if (submitData['tags'].includes(selectedTag)) {
       return (submitData['tags'] = submitData['tags'].filter((i) => i !== selectedTag));
@@ -80,15 +87,18 @@ function WritePage({ defaultPage }) {
     }
     //여기에 이제 전송하면됨
     //post일떄
+    console.log(defaultPage1, defaultPage);
     if (postFlag === 0) {
       submitData[''];
       //string to num
       submitData['memberId'] = parseInt(localStorage.getItem('member_id'));
       (submitData['totalLikeHeart'] = 0), (submitData['my_like_heart'] = false);
       submitData['imgId'] = imgId;
-      console.log(submitData);
       fetchPostWrite(submitData);
+    } else {
+      fetchPostUpdate(defaultPage1.imgId, submitData);
     }
+    navigate(`/detail/${defaultPage1.imgId}`);
     //edit일 때
     // else {
     // }

@@ -7,7 +7,7 @@ import { authenticated } from '../../api/axiosInstance.js';
 const WritePageImage = forwardRef(({ defaultImage, subMitImgID }, ref) => {
   const imgRef = useRef(null);
   const [imgId, setImgId] = useState(null);
-  const [preview, setPreview] = useState(defaultImage.defaultImage);
+  const [preview, setPreview] = useState(`@/assets/dog${defaultImage.defaultImage}.jpg`);
   const imgUploadHandler = async (event) => {
     const file = event.target.files[0];
     if (file) {
