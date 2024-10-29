@@ -2,6 +2,7 @@ import Countdown, { zeroPad } from 'react-countdown';
 import gift from '@/assets/petclothes.jpeg';
 import * as S from './Auction.style';
 import { useState } from 'react';
+import { useStore } from '../../components/store/point';
 
 export const Auction = () => {
   const [inputPrice, setInputPrice] = useState(0);
@@ -11,6 +12,7 @@ export const Auction = () => {
     { name: '닝닝', price: 11500 },
     { name: '윈터', price: 11000 },
   ]);
+  const { point, dec } = useStore();
 
   const RANKLIST = ['🥇', '🥈', '🥉', '🤦🏻‍♀️', '🤦🏻'];
 
@@ -20,11 +22,11 @@ export const Auction = () => {
 
   const handleJoinClick = () => {
     const myPoint = localStorage.getItem('point');
-    if (myPoint < parseInt(inputPrice)) return;
+    if (point < parseInt(inputPrice)) return;
 
     const name = localStorage.getItem('member_name');
     const newList = [...joinerList, { name, price: parseInt(inputPrice) }].sort((a, b) => b.price - a.price);
-    localStorage.setItem('point', myPoint - parseInt(inputPrice));
+    dec(parseInt(inputPrice));
     setJoinerList(newList);
     setInputPrice(0);
   };

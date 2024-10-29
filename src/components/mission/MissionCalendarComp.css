@@ -11,6 +11,11 @@
   /* 토요일 컬러 */
   color: red;
 }
+#calendar1 .fc-day-today {
+  background-color: transparent !important; /* 배경색을 투명으로 */
+  color: inherit !important; /* 텍스트 색상도 다른 날짜와 동일하게 */
+  font-weight: normal !important; /* 폰트 스타일도 동일하게 */
+}
 
 .fc .fc-toolbar.fc-header-toolbar {
   padding: 10px 20px;

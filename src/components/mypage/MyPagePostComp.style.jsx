@@ -13,6 +13,8 @@ export const MyPagePostCard = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #000;
+  margin-bottom: 20px;
+  cursor: pointer;
 `;
 
 export const CardContentsWrapper = styled.div`
@@ -43,6 +45,7 @@ export const CardProfileWrapper = styled.div`
     font-weight: 300;
     line-height: normal;
   }
+  margin-bottom: 5px;
 `;
 
 export const CardTitleWrapper = styled.div`
