@@ -6,25 +6,10 @@ import { useQueryClient } from '@tanstack/react-query';
 export const Comment = ({ comments, postId }) => {
   const [commentText, setCommentText] = useState();
   const queryClient = useQueryClient();
-  // const comments = [
-  //   {
-  //     comment: '너도 좀 치는구나?',
-  //     userName: '카리나',
-  //     date: '2024-10-23',
-  //     userImage: 'https://i.ibb.co/1QzR2ZN/seolyoon.jpg',
-  //   },
-  //   {
-  //     comment: '여신이다 여신이다!',
-  //     userName: '설윤',
-  //     date: '2024-10-11',
-  //     userImage: 'https://i.ibb.co/1QzR2ZN/seolyoon.jpg',
-  //   },
-  // ];
 
   const handleCommentWriteSubmit = async (e) => {
-    // TODO: 댓글등록 기능 API 연동
     e.preventDefault();
-    await fetchCommentWrite(1, { content: commentText, memberId: localStorage.getItem('member_id'), postId: 1 });
+    await fetchCommentWrite(postId, { content: commentText, memberId: localStorage.getItem('member_id'), postId });
     queryClient.invalidateQueries(['postDetail', postId]);
     setCommentText('');
   };
@@ -44,9 +29,6 @@ export const Comment = ({ comments, postId }) => {
         {comments.map((commentInfo, idx) => (
           <S.CommentItem key={idx}>
             <S.CommentWriter>
-              {/* <S.CommentWriterImageWrapper>
-                  <S.CommentWriterImage src={commentInfo.userImage} />
-                </S.CommentWriterImageWrapper> */}
               <S.CommentNameWrapper>
                 <S.CommentName>{commentInfo.memberName}</S.CommentName>
                 <S.CommentDate>{commentInfo.commentDate}</S.CommentDate>

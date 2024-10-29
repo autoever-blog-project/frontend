@@ -55,3 +55,18 @@ export const PostPageDropDownContainer = styled.div`
   justify-content: flex-end;
   width: 100%;
 `;
+
+export const WritePostButton = styled.button`
+  position: fixed;
+  bottom: 0;
+  right: 50px;
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+`;
+
+export const WritePostImg = styled.img`
+  width: 177px;
+  height: 210px;
+`;
