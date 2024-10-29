@@ -20,6 +20,7 @@ import footimage from '@/assets/footimage.jpg';
 import duedatejpg from '@/assets/duedateevent.jpg';
 import { useStore } from '../../components/store/point';
 import confetti from 'canvas-confetti';
+import { showPointIncreaseEffect } from '../../animation/animation';
 
 //예정일이 없을때 랜덤 미션 리스트
 const missions = [
@@ -110,6 +111,7 @@ function MissionPage() {
   const handleComplete = () => {
     setIsComplete(true);
     inc(1000);
+    showPointIncreaseEffect(1000);
     firework();
     localStorage.setItem('complete_day', new Date().toDateString());
   };
