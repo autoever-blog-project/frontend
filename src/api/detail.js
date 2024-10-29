@@ -80,3 +80,9 @@ export const fetchPostWithTag = async (tag, page) => {
 export const fetchMissionList = async () => {
   return await authenticated.get('mission/calendar/list');
 };
+
+// 내 글 리스트 가져오기
+
+export const fetchPostWithId = async (id) => {
+  return await authenticated.get(`post/list/mypost/${id}`);
+};

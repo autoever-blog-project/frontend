@@ -17,6 +17,8 @@ import dog3 from '@/assets/dog3.jpg';
 import dog4 from '@/assets/dog4.jpg';
 import dog5 from '@/assets/dog5.jpg';
 import dog6 from '@/assets/dog6.jpg';
+import { fetchPostWithId } from '../../api/detail';
+import { useNavigate } from 'react-router-dom';
 
 const initState = {
   dtoList: [],
@@ -32,46 +34,47 @@ const initState = {
 };
 
 function MyPagePostComp() {
+  const navigate = useNavigate();
   const [data, setData] = useState(initState);
   const EMOJI = { happy: '😃', unhappy: '🙃', laugh: '🤣' };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetchPostGetAll();
-  //       setData(response.data);
-  //       console.log(response);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetchPostWithId(localStorage.getItem('member_id'));
+        setData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
 
-  const handleClickCard = (index) => {
-    //디테일페이지로 (index의 페이지)
+  const handleClickCard = (postId) => {
+    navigate(`/detail/${postId}`);
   };
 
   return (
     <>
       <MyPagePostList>
-        {/* {data.dtoList.map((item, i) => {
+        {data.dtoList.map((item, i) => {
           return (
             <MyPagePostCard
               key={i}
               onClick={() => {
-                handleClickCard(i);
+                handleClickCard(item.postId);
               }}
             >
               <CardContentsWrapper>
                 <CardProfileWrapper>
-                  <img src={item.profile_image}></img>
-                  <h2>{item.nickname}</h2>
-                  <p>{item.post_date}</p>
+                  <img src={localStorage.getItem('member_profile')}></img>
+                  <h2>{localStorage.getItem('member_name')}</h2>
+                  <p>{item.postDate}</p>
                 </CardProfileWrapper>
                 <CardTitleWrapper>
-                  <img src={item.emoji}></img>
+                  <div>{`${EMOJI[item.emoji]}`}</div>
                   <p>{item.title}</p>
                 </CardTitleWrapper>
                 <CardContent>
@@ -79,12 +82,12 @@ function MyPagePostComp() {
                 </CardContent>
               </CardContentsWrapper>
               <CardImageWrapper>
-                <img src={item.img}></img>
+                <img src={`/src/assets/dog${item.postId}`}></img>
               </CardImageWrapper>
             </MyPagePostCard>
           );
-        })} */}
-        <MyPagePostCard>
+        })}
+        {/* <MyPagePostCard>
           <CardContentsWrapper>
             <CardProfileWrapper>
               <img src={localStorage.getItem('member_profile')}></img>
@@ -149,7 +152,7 @@ function MyPagePostComp() {
           <CardImageWrapper>
             <img src={dog2}></img>
           </CardImageWrapper>
-        </MyPagePostCard>
+        </MyPagePostCard> */}
       </MyPagePostList>
     </>
   );
