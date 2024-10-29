@@ -90,15 +90,6 @@ function PostPage() {
           <DropDown submitSort={handleSortByParams} />
         </S.PostPageDropDownContainer>
         <S.PostPagePostGridContainer>
-          {currentItems == null ? (
-            <></>
-          ) : (
-            currentItems.map((item, idx) => (
-              <S.PostPagePostGridPostCardContainer key={idx}>
-                <PostCard postInfo={item} />
-              </S.PostPagePostGridPostCardContainer>
-            ))
-          )}
           {currentItems.map((item, idx) => (
             <S.PostPagePostGridPostCardContainer key={idx}>
               <PostCard postInfo={item} />
