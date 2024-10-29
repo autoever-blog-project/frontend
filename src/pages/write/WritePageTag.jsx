@@ -5,14 +5,22 @@ import * as S from './WritePageStyle.js';
 
 function WritePageTag({ defaultTags, onSubmitTags }) {
   //tag리스트
-  const tags = ['전체', '강아지', '여행qweqeqweqweq'];
+  const tags = ['산책', '여행', '목욕'];
   const [selectedTag, setSelectedTag] = useState([]);
   const handleTagBtnClick = (tag) => {
     setSelectedTag((prevTags) => {
-      if (prevTags.includes(tag)) {
-        return prevTags.filter((i) => i !== tag);
+      let isInclude = false;
+      for (let i of selectedTag) {
+        if (Object.values(i).includes(tag)) {
+          isInclude = true;
+          break;
+        }
+      }
+
+      if (isInclude) {
+        return prevTags.filter((i) => i.name !== tag);
       } else {
-        return [...prevTags, tag];
+        return [...prevTags, { name: tag }];
       }
     });
   };
@@ -29,7 +37,7 @@ function WritePageTag({ defaultTags, onSubmitTags }) {
           <div style={{ display: 'flex', flexDirection: 'row' }}>
             {selectedTag.map((item, idx) => (
               <p key={idx} style={{ fontSize: '20px', paddingLeft: '15px' }}>
-                {`#${item}`}
+                {`#${item.name}`}
               </p>
             ))}
           </div>
