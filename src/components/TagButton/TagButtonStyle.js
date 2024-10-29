@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+import { theme } from '@/styles/theme';
 
 export const TagButtonContainer = styled.button`
-  border: 1px solid ${(props) => (props.$clicked ? 'red' : 'black')};
-  color: ${(props) => (props.$clicked ? 'red' : 'black')};
+  color: ${(props) => (props.$clicked ? 'white' : 'black')};
+  border: none;
+  background-color: ${theme.colors.bgBlue};
   border-radius: 13px;
   padding-left: 10px;
   padding-right: 10px;
