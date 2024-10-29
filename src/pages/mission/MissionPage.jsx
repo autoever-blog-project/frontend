@@ -18,6 +18,9 @@ import plusIcon from '@/assets/PlusIcon.svg';
 import tkscor from '@/assets/tkscor.jpg';
 import footimage from '@/assets/footimage.jpg';
 import duedatejpg from '@/assets/duedateevent.jpg';
+import { useStore } from '../../components/store/point';
+import confetti from 'canvas-confetti';
+
 //예정일이 없을때 랜덤 미션 리스트
 const missions = [
   { mission: '목욕 시키고', imageUrl: bathImage },
@@ -26,6 +29,7 @@ const missions = [
 ];
 
 function MissionPage() {
+  const { point, inc } = useStore();
   const [todayMission, setTodayMission] = useState(null);
   const [currentDay, setCurrentDay] = useState(new Date().toDateString());
   const [refresh, setRefresh] = useState(false);
@@ -105,9 +109,8 @@ function MissionPage() {
 
   const handleComplete = () => {
     setIsComplete(true);
-    const temp = localStorage.getItem('point') ? localStorage.getItem('point') : '0';
-    const pnt = parseInt(temp) + 10;
-    localStorage.setItem('point', pnt);
+    inc(1000);
+    firework();
     localStorage.setItem('complete_day', new Date().toDateString());
   };
 
@@ -116,10 +119,13 @@ function MissionPage() {
     if (file) {
       const formData = new FormData();
       formData.append('image', file);
-      formData.append('memberId', localStorage.getItem('member_id'));
+      formData.append('memberId', Number(localStorage.getItem('member_id')));
       formData.append('missionDate', new Date().toDateString());
       // for (const key in data) {
       //   formData.append(key, data[key]);
+      // }
+      // for (const [key, value] of formData.entries()) {
+      //   console.log(key, value);
       // }
       try {
         // await fetchMissionWrite(formData);
@@ -174,7 +180,7 @@ function MissionPage() {
               </TextContainer>
             </>
           ) : todayMission && isDueDay ? (
-            todayMission && ( // 개인미션일때는 고정 이미지url , 강아지와 주인이 의욕에 불타는사진
+            todayMission && (
               <>
                 <ImageContainer>
                   <img src={todayMission.imageUrl} alt={todayMission.mission} />
@@ -233,6 +239,40 @@ function MissionPage() {
       {/* <input type="file" ref={fileInputRef} style={{ display: 'none' }} accept="image/*" onChange={handleFileUpload} /> */}
     </>
   );
+}
+
+function firework() {
+  var duration = 15 * 100;
+  var animationEnd = Date.now() + duration;
+  var defaults = { startVelocity: 25, spread: 360, ticks: 50, zIndex: 0 };
+  //  startVelocity: 범위, spread: 방향, ticks: 갯수
+
+  function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  var interval = setInterval(function () {
+    var timeLeft = animationEnd - Date.now();
+
+    if (timeLeft <= 0) {
+      return clearInterval(interval);
+    }
+
+    var particleCount = 50 * (timeLeft / duration);
+    // since particles fall down, start a bit higher than random
+    confetti(
+      Object.assign({}, defaults, {
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      })
+    );
+    confetti(
+      Object.assign({}, defaults, {
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      })
+    );
+  }, 250);
 }
 
 export default MissionPage;

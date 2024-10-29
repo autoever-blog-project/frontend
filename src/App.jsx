@@ -25,9 +25,9 @@ function App() {
         {
           path: '/',
           element: (
-            <PuppyInfoRoute>
-              <MainPage />
-            </PuppyInfoRoute>
+            // <PuppyInfoRoute>
+            <MainPage />
+            //</PuppyInfoRoute>
           ),
         },
         {

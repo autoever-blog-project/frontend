@@ -3,11 +3,13 @@ import * as S from './Header.style';
 import Logo from '@/assets/logo.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { authenticated } from '@/api/axiosInstance';
+import { useStore } from '@/components/store/point';
 
 export const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { point, inc } = useStore();
 
   // 페이지 경로 확인
   const isCurrentPath = (path) => {
@@ -54,8 +56,8 @@ export const Header = () => {
         localStorage.setItem('member_email', response.data.social_id);
         localStorage.setItem('member_name', response.data.nickname);
         localStorage.setItem('point', 1000);
-        navigate('/'); // 로그인 후 홈으로 이동
-        navigate('/');
+        navigate('/signup'); // 로그인 후 홈으로 이동
+        navigate('/signup');
       }
     };
 
@@ -88,7 +90,7 @@ export const Header = () => {
           {isLogin ? (
             <>
               <S.PointWrapper>
-                <S.Point>{localStorage.getItem('point')}</S.Point>
+                <S.Point>{point}</S.Point>
                 <S.Point>포인트</S.Point>
               </S.PointWrapper>
               <S.MenuProfile onClick={() => handleMovePageClick('mypage')}>
