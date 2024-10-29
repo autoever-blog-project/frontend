@@ -20,14 +20,18 @@ function WritePage({ defaultPage }) {
   useEffect(() => {
     // contentRef.current.setContent('qwe');
     //defaultPage1이 null이 아니면 selected
-    defaultPage == null ? setDefaultPageInfo({ tags: [] }) : defaultPage1['tags'];
+    defaultPage == null ? setDefaultPageInfo({ tags: [] }) : { tags: defaultPage1['tags'] };
 
     if (defaultPage !== null) {
       setPostFlag(1);
     }
     handleSubmitTag(defaultPageInfo);
   }, []);
-  const submitData = { tags: [] };
+  const submitData = {
+    tags: defaultPageInfo['tags'].map((item) => {
+      name: item.name;
+    }),
+  };
   //이모지 따라 나올 글귀 리스트
   const emojies = ['q', 'w', 'e'];
   const parsingContent = (content, before, after) => {
@@ -38,9 +42,8 @@ function WritePage({ defaultPage }) {
     return content;
   };
 
-  console.log(defaultPage1);
-  console.log(postFlag);
   const handleSubmitTag = (selectedTag) => {
+    console.log(selectedTag);
     if (submitData['tags'].includes(selectedTag)) {
       return (submitData['tags'] = submitData['tags'].filter((i) => i !== selectedTag));
     } else {
@@ -87,7 +90,8 @@ function WritePage({ defaultPage }) {
     }
     //여기에 이제 전송하면됨
     //post일떄
-    console.log(defaultPage1, defaultPage);
+
+    console.log(defaultPage1, defaultPage, submitData);
     if (postFlag === 0) {
       submitData[''];
       //string to num
