@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { fetchPuppyImageWrite, fetchPuppyWrite } from '../../api/detail';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { showPointIncreaseEffect } from '../../animation/animation';
 
 const SignUpPage = () => {
   const [image, setImage] = useState(null); // 파일 자체를 저장
@@ -37,6 +38,7 @@ const SignUpPage = () => {
       const puppyId = await fetchPuppyWrite(puppyDto);
       localStorage.setItem('puppy_info', puppyId.data);
 
+      showPointIncreaseEffect(20000);
       navigate('/'); // 메인 페이지로 이동
     } catch (error) {
       console.error('Error registering puppy:', error);
@@ -46,7 +48,7 @@ const SignUpPage = () => {
   return (
     <PageWrapper>
       <Content>
-        <h2>강아지 정보를 입력 해주세요.</h2>
+        <h2>첫 미션: 강아지 정보 입력하기!</h2>
         <form onSubmit={handleSubmit}>
           <InputField>
             <label htmlFor="name">이름:</label>
@@ -81,6 +83,8 @@ const Content = styled.div`
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   h2 {
     margin-bottom: 70px;
+    font-size: large;
+    font-weight: 600;
   }
 `;
 

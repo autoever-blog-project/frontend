@@ -111,7 +111,7 @@ function MissionPage() {
   const handleComplete = () => {
     setIsComplete(true);
     inc(1000);
-    showPointIncreaseEffect();
+    showPointIncreaseEffect(1000);
     firework();
     localStorage.setItem('complete_day', new Date().toDateString());
   };
