@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
 import { useEffect } from 'react';
 import * as S from './PostCardStyle.js';
-import emoji from '@/assets/emoji _slightly frowning face.svg';
 
-//Emoji 경로 수정
+const EMOJI = { happy: '😃', unhappy: '🙃', laugh: '🤣' };
+
 function PostCardBody({ postInfo }) {
   const postTags = postInfo.tags.map((item) => `#${item.name}  `);
   return (
     <div>
       <S.PostCardBodyContainer>
-        <div style={{ display: 'flex', gap: 10 }}>
-          <S.PostCardEmoji src={emoji} />
+        <div style={{ display: 'flex', gap: 5 }}>
+          <div>{EMOJI[postInfo.emoji]}</div>
           <S.PostCardTag>{postTags}</S.PostCardTag>
         </div>
         <S.PostCardTitle>{postInfo.title}</S.PostCardTitle>
