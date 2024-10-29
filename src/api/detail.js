@@ -69,11 +69,11 @@ export const fetchPostWrite = async (data) => {
 
 //게시글 검색 결과로 받아오기
 export const fetchPostWithSearch = async (data, page) => {
-  return await authenticated.get(`post/list/search?keyword=${data}&page=${page}&size=6`);
+  return await authenticated.get(`post/list/search?keyword=${data}&page=${page}&size=12`);
 };
 
 export const fetchPostWithTag = async (tag, page) => {
-  return await authenticated.get(`post/list/search/tag/${tag}?page=${page}&size=6`);
+  return await authenticated.get(`post/list/search/tag/${tag}?page=${page}&size=12`);
 };
 
 // 미션 히스토리 받아오기

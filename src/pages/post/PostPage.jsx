@@ -43,7 +43,7 @@ function PostPage() {
     (async () => {
       try {
         if (tags.includes(tag)) {
-          const postList = await fetchPostWithTag(tag, 1);
+          const postList = await fetchPostWithTag(tag, currentPage);
           setPostInfos(postList.data.dtoList);
         }
       } catch (e) {
@@ -69,7 +69,6 @@ function PostPage() {
     }
   };
 
-  console.log(postInfos);
   const handleWritePostClick = () => {
     navigate('/write');
   };
