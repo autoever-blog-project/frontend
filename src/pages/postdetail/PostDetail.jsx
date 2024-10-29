@@ -45,7 +45,7 @@ export const PostDetail = () => {
           ))}
         </S.HashTagWrapper>
         <S.ImageWrapper>
-          <S.Image src="https://i.ytimg.com/vi/j9rBUbgb4ao/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAYUjIshD9AsT0ko8QTBUhJA4aOkw" />
+          <S.Image src={`/src/assets/dog${postId}.jpg`} />
         </S.ImageWrapper>
         <S.Content readOnly>{content}</S.Content>
         {isPending ? (

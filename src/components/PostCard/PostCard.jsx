@@ -17,7 +17,7 @@ function PostCard({ postInfo }) {
     <div onClick={handlePostCardClick}>
       <S.PostCardContainer>
         <S.PostCardOverlay className="overlay" />
-        <S.PostCardImg src={image} />
+        <S.PostCardImg src={`/src/assets/dog${postInfo.postId}.jpg`} />
         <PostCardBody postInfo={postInfo} />
         <PostCardFooter postInfo={postInfo} />
       </S.PostCardContainer>
