@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import * as S from './WritePageStyle.js';
-import emojiTest from '@/assets/emoji _slightly frowning face.svg';
 
 function WritePageRadio({ defaultEmoji }) {
   const [radioInput, setRadioInput] = useState('');
@@ -16,7 +15,8 @@ function WritePageRadio({ defaultEmoji }) {
   }, []);
   //emoji 리스트
   //이모지 따라 나올 글귀 리스트
-  const emojiList = ['q', 'w', 'e'];
+  const emojiList = ['happy', 'unhappy', 'laugh'];
+  const emojiEmotion = ['😀', '🙃', '🤣'];
   return (
     <div>
       <S.WritePageRadioContainer style={{ paddingLeft: 10 }}>
@@ -26,7 +26,7 @@ function WritePageRadio({ defaultEmoji }) {
         <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
           {emojiList.map((item, idx) => (
             <S.WritePageRadioInputContainer key={idx} onClick={() => handleRadioClick(idx)}>
-              <img src={emojiTest} />
+              <S.EmojiSpan>{emojiEmotion[idx]}</S.EmojiSpan>
               <input
                 type="radio"
                 name="emoji"

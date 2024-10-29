@@ -6,12 +6,10 @@ import WritePageRadio from './WritePageRadio.jsx';
 import * as S from './WritePageStyle.js';
 import WritePageTag from './WritePageTag.jsx';
 import WritePageTitleInput from './WritePageTitleInput.jsx';
-import chk from '@/assets/0.png';
-import { useLocation } from 'react-router-dom';
 import { fetchPostWrite } from '../../api/detail.js';
 
 function WritePage({ defaultPage }) {
-  const defaultPage1 = useLocation().state?.defaultPage || null;
+  const defaultPage1 = defaultPage || null;
   const imgRef = useRef();
   const contentRef = useRef();
   const [postFlag, setPostFlag] = useState(0);
@@ -20,7 +18,7 @@ function WritePage({ defaultPage }) {
   useEffect(() => {
     // contentRef.current.setContent('qwe');
     //defaultPage1이 null이 아니면 selected
-    defaultPage1 === null ? setDefaultPageInfo({ tags: [] }) : console.log(defaultPage1['tags']);
+    defaultPage1 === null ? setDefaultPageInfo({ tags: [] }) : defaultPage1['tags'];
     handleSubmitTag(defaultPageInfo);
   }, []);
   const submitData = { tags: [] };
@@ -33,6 +31,8 @@ function WritePage({ defaultPage }) {
     });
     return content;
   };
+
+  console.log(defaultPage1);
   const handleSubmitTag = (selectedTag) => {
     if (submitData['tags'].includes(selectedTag)) {
       return (submitData['tags'] = submitData['tags'].filter((i) => i !== selectedTag));
@@ -88,7 +88,6 @@ function WritePage({ defaultPage }) {
       submitData['imgId'] = imgId;
       console.log(submitData);
       fetchPostWrite(submitData);
-      alert(`input is ${submitData}`);
     }
     //edit일 때
     // else {
@@ -123,7 +122,7 @@ function WritePage({ defaultPage }) {
           </form>
           <WritePageTag onSubmitTags={handleSubmitTag} defaultTags={defaultPage1['tags']} />
           <WritePageEditor defaultValue={defaultPage1['content']} ref={contentRef} />
-          <WritePageImage ref={imgRef} defaultImage={defaultPage1['img']} subMitImgID={setimgId} />
+          <WritePageImage ref={imgRef} defaultImage={defaultPage1['imgId']} subMitImgID={setimgId} />
           <S.WritePageSubmitButton
             type="button"
             onClick={() => {

@@ -139,7 +139,7 @@ export const WritePageSubmitButton = styled.button`
 //WritePageRadioContainer 구성 요소
 
 export const WritePageRadioInputContainer = styled.div`
-  width: 80px;
+  width: 60px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -147,6 +147,10 @@ export const WritePageRadioInputContainer = styled.div`
   &:hover {
     transform: scale(1.2);
   }
+`;
+
+export const EmojiSpan = styled.span`
+  font-size: 36px;
 `;
 
 //WritePageImgContainer 구성요소
