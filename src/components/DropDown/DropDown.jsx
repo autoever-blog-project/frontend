@@ -43,7 +43,7 @@ export default function CustomizedSelects({ submitSort }) {
   const [sort, setSort] = React.useState('최신 순');
   const handleChange = (event) => {
     setSort(event.target.value);
-    submitSort(sort);
+    submitSort(event.target.value);
   };
   return (
     <div>

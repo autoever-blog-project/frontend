@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import * as S from './TagButtonStyle.js';
 
 function TagButton({ tag, submitTag, already }) {
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(already);
 
   return (
     <div
@@ -13,7 +13,7 @@ function TagButton({ tag, submitTag, already }) {
         submitTag(tag);
       }}
     >
-      <S.TagButtonContainer $clicked={already}>
+      <S.TagButtonContainer $clicked={clicked}>
         <S.TagButtonOverlay className="overlay" />
         {tag}
       </S.TagButtonContainer>

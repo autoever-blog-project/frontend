@@ -28,7 +28,7 @@ function MainPage() {
   }, []);
   return (
     <div>
-      {postInfo === null ? (
+      {postInfo == null ? (
         <></>
       ) : (
         <S.MainViewBodyContainer>
