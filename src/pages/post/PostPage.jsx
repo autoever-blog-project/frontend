@@ -11,7 +11,7 @@ import writedog from '@/assets/writedog.png';
 
 function PostPage() {
   //태그 리스트
-  const tags = ['강아지', '여행', '댕스타그램', '산책'];
+  const tags = ['산책', '여행', '목욕'];
   const inputData = useLocation().state?.searchData || '';
   const [postInfos, setPostInfos] = useState([]);
   const navigate = useNavigate();
@@ -39,15 +39,17 @@ function PostPage() {
   };
   const [selectedTag, setSelectedTag] = useState('');
   const sortByTag = (tag) => {
+    console.log(tag);
     setSelectedTag(tag);
-    async () => {
+    (async () => {
       try {
+        console.log('hi');
         const postList = await fetchPostWithTag(tag, 1);
         setPostInfos(postList.data.dtoList);
       } catch (e) {
         console.log(e);
       }
-    };
+    })();
     //postInfos sort하는 기능 (api랑 연동시 제작)
   };
   const handleSortByParams = (param) => {
