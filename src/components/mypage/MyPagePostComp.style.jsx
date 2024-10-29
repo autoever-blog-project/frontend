@@ -23,7 +23,7 @@ export const CardContentsWrapper = styled.div`
 `;
 
 export const CardProfileWrapper = styled.div`
-  width: 180px;
+  width: 240px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -54,10 +54,11 @@ export const CardTitleWrapper = styled.div`
   display: flex;
   gap: calc(5px);
   margin-bottom: 20px;
-  img {
+  align-items: center;
+
+  div {
+    font-size: 30px;
     align-items: center;
-    width: 30px;
-    height: 30px;
   }
   p {
     font-size: 30px;
