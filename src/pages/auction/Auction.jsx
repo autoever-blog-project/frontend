@@ -3,6 +3,7 @@ import gift from '@/assets/petclothes.jpeg';
 import * as S from './Auction.style';
 import { useState } from 'react';
 import { useStore } from '../../components/store/point';
+import { firework } from '../mission/MissionPage';
 
 export const Auction = () => {
   const [inputPrice, setInputPrice] = useState(0);
@@ -29,6 +30,7 @@ export const Auction = () => {
     dec(parseInt(inputPrice));
     setJoinerList(newList);
     setInputPrice(0);
+    firework();
   };
 
   const todayMidnight = new Date(new Date().setHours(24, 0, 0, 0)).getTime();

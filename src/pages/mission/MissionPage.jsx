@@ -243,7 +243,7 @@ function MissionPage() {
   );
 }
 
-function firework() {
+export function firework() {
   var duration = 15 * 100;
   var animationEnd = Date.now() + duration;
   var defaults = { startVelocity: 25, spread: 360, ticks: 50, zIndex: 0 };
