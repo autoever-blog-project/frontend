@@ -4,9 +4,11 @@ import { fetchPuppyImageWrite, fetchPuppyWrite } from '../../api/detail';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { showPointIncreaseEffect } from '../../animation/animation';
+import { useStore } from '../../components/store/point';
 
 const SignUpPage = () => {
   const [image, setImage] = useState(null); // 파일 자체를 저장
+  const { inc } = useStore();
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [weightId, setWeightId] = useState(1);
@@ -38,6 +40,7 @@ const SignUpPage = () => {
       const puppyId = await fetchPuppyWrite(puppyDto);
       localStorage.setItem('puppy_info', puppyId.data);
 
+      inc(20000);
       showPointIncreaseEffect(20000);
       navigate('/'); // 메인 페이지로 이동
     } catch (error) {
